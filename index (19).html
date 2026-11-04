@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What I Promised — ما وعدتُكِ به</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Handjet:wght@400;500;700&family=Blaka&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:#0B0920;display:flex;justify-content:center;color:#FFFFFF;-webkit-font-smoothing:none}
+.phone{position:relative;width:100%;max-width:430px;height:100dvh;min-height:640px;overflow:hidden;font-family:'Handjet',sans-serif}
+html[lang=en] .phone{font-family:'DotGothic16',monospace}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;padding:24px 20px 20px;gap:14px}
+.screen.on{display:flex}
+.scene{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.rel{position:relative;z-index:1}
+.dot{font-family:'DotGothic16',monospace}
+.hd{font-family:'Blaka',serif;font-weight:400}
+html[lang=en] .hd{font-family:'DotGothic16',monospace}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.top .grp{display:flex;align-items:center;gap:12px;margin-inline-start:auto}
+.chip{font-family:'DotGothic16',monospace;font-size:13px;letter-spacing:2px;background:#14102E;padding:6px 10px;color:#FFE066}
+.lang{display:flex;background:#14102E;box-shadow:0 0 0 3px #FFFFFF}
+.lang button{width:44px;height:44px;border:0;border-radius:0;background:transparent;color:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lang .ar{font-family:'Handjet',sans-serif;font-size:21px;font-weight:700}
+.lang .en{font-family:'DotGothic16',monospace;font-size:15px}
+.lang button[aria-pressed=true]{background:#FFE066;color:#14102E}
+.back{width:44px;height:44px;border:0;border-radius:0;background:#241E52;box-shadow:0 0 0 3px #FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+.flip{transform:scaleX(-1)}
+html[dir=ltr] .flipr{transform:scaleX(-1)}
+.win{background:#241E52;box-shadow:0 -4px 0 0 #FFFFFF,0 4px 0 0 #FFFFFF,-4px 0 0 0 #FFFFFF,4px 0 0 0 #FFFFFF,inset 0 0 0 4px #5A4FB0;margin:0 4px}
+.plate{position:absolute;top:-19px;inset-inline-start:14px;min-height:34px;padding:0 14px;display:flex;align-items:center;background:#FF5C93;color:#14102E;font-size:19px;font-weight:700;box-shadow:0 0 0 3px #FFFFFF}
+html[lang=en] .plate{font-size:15px;font-weight:400}
+.yes{display:flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 14px;border:0;border-radius:0;background:#FFE066;color:#14102E;font:inherit;font-size:22px;font-weight:700;cursor:pointer;box-shadow:0 0 0 3px #FFFFFF,6px 6px 0 3px #FF5C93}
+html[lang=en] .yes{font-size:18px;font-weight:400}
+.yes:active,.mood:active,.card:active{transform:translate(2px,2px)}
+.err{min-height:0;color:#FFB8CD;font-size:18px;line-height:1.5}
+html[lang=en] .err{font-size:14px}
+.err:empty{display:none}
+input.name{height:52px;border:0;border-radius:0;padding:0 14px;font:inherit;font-size:22px;color:#14102E;background:#F4F0FF;box-shadow:inset 4px 4px 0 0 #A79EE0;width:100%;outline:none}
+html[lang=en] input.name{font-size:16px}
+input.name:focus{box-shadow:inset 4px 4px 0 0 #A79EE0,0 0 0 3px #FFE066}
+.link{background:none;border:0;color:#C9C2F0;font:inherit;font-size:19px;cursor:pointer;min-height:44px;text-align:start;padding:0 12px}
+html[lang=en] .link{font-size:15px}
+.moods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:0 6px}
+.mood{min-height:56px;padding:6px 8px;line-height:1.3;border:0;border-radius:0;font:inherit;font-size:19px;font-weight:500;background:#F4F0FF;color:#14102E;cursor:pointer;box-shadow:0 0 0 3px #14102E,4px 4px 0 3px #14102E}
+html[lang=en] .mood{font-size:14px}
+.mood[aria-pressed=true]{background:#FFE066;font-weight:700;box-shadow:0 0 0 3px #14102E,4px 4px 0 3px #FF5C93}
+.say{margin:0;font-size:23px;line-height:1.7;white-space:pre-line}
+html[lang=en] .say{font-size:17px}
+.say b{color:#FFE066;font-weight:inherit}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding:6px}
+.card{position:relative;border:0;border-radius:0;padding:0;background:#241E52;color:#FFFFFF;font:inherit;display:flex;flex-direction:column;cursor:pointer;box-shadow:0 0 0 4px #FFFFFF;text-align:start}
+.card .pic{width:100%;height:clamp(100px,calc((100dvh - 390px) / 2),210px);background:#2D2566;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.card .nm{padding:8px 10px;font-size:19px;font-weight:700;line-height:1.2;min-height:44px;display:flex;align-items:center}
+html[lang=en] .card .nm{font-size:13px;font-weight:400}
+.card[aria-pressed=true]{box-shadow:0 0 0 4px #FFE066,6px 6px 0 4px #FF5C93}
+.card[aria-pressed=true] .nm{background:#FFE066;color:#14102E}
+.pic img,.sprite img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;image-rendering:auto}
+.ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#C9C2F0;font-size:15px;text-align:center;padding:8px;width:100%;height:100%}
+.row{display:flex;gap:12px;margin:0 4px}
+.surprise{flex:0 0 auto;min-height:52px;padding:0 14px;border:0;border-radius:0;background:#14102E;color:#FFFFFF;font:inherit;font-size:19px;cursor:pointer;box-shadow:0 0 0 3px #5A4FB0;display:flex;align-items:center;gap:8px}
+.surprise .q{font-family:'DotGothic16',monospace;color:#FF5C93;font-size:20px}
+html[lang=en] .surprise{font-size:14px}
+.banner{align-self:center;background:#14102E;padding:8px 14px;box-shadow:0 0 0 3px #FFFFFF;margin:0;font-size:24px;text-align:center;max-width:100%}
+html[lang=en] .banner{font-size:15px}
+.banner b{color:#FFE066;font-weight:inherit}
+.stage{flex:1 1 auto;min-height:0;display:flex;align-items:flex-end;justify-content:center;margin-bottom:-120px}
+.sprite{width:min(72%,290px);height:calc(100% + 0px);max-height:480px;min-height:240px;background:#FFFFFF;box-shadow:0 0 0 4px #14102E;overflow:hidden}
+.sprite .ph{color:#14102E}
+.dlg{position:relative;padding:28px 18px 32px;cursor:pointer;min-height:132px}
+#charSay{max-height:30vh;overflow-y:auto}
+.caret{position:absolute;bottom:10px;inset-inline-end:14px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.tools button{min-height:48px;border:0;border-radius:0;background:#14102E;color:#FFFFFF;font:inherit;font-size:19px;font-weight:500;cursor:pointer;box-shadow:0 0 0 2px #FFFFFF}
+html[lang=en] .tools button{font-size:13px;color:#FFE066}
+.petal{position:absolute;top:-12px;width:8px;height:8px;background:#FF8FB1;z-index:0;animation:fall linear infinite;pointer-events:none}
+@keyframes fall{to{transform:translate(-60px,110vh)}}
+@media (prefers-reduced-motion:reduce){.petal,.caret{animation:none}.petal{display:none}}
+.overlay{position:absolute;inset:0;z-index:20;background:rgba(11,9,32,.82);display:none;align-items:center;justify-content:center;padding:24px}
+.overlay.on{display:flex}
+.logwin{width:100%;max-height:80%;display:flex;flex-direction:column;padding:28px 16px 16px;position:relative}
+.loglist{list-style:none;margin:0;padding:0;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.loglist li{background:#14102E;padding:10px 12px;font-size:18px;line-height:1.4}
+html[lang=en] .loglist li{font-size:13px}
+.loglist small{display:block;color:#C9C2F0;font-family:'DotGothic16',monospace;font-size:12px}
+.title-h{margin:0;font-size:56px;line-height:1.2;text-align:center;text-shadow:4px 4px 0 #FF5C93,8px 8px 0 #14102E}
+html[lang=en] .title-h{font-size:54px;line-height:1.05}
+.hearts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:6px}
+.heart{height:clamp(96px,calc((100dvh - 380px) / 3),150px);border:0;border-radius:0;padding:0;background:#241E52;box-shadow:0 0 0 4px #FFFFFF;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.heart:active{transform:translate(2px,2px)}
+.heart.no{background:#3B2F7A;box-shadow:0 0 0 4px #FF8FB1,6px 6px 0 4px #14102E;animation:shake .4s steps(4)}
+.heart.yes2{background:#3B2F7A;box-shadow:0 0 0 4px #FFE066,6px 6px 0 4px #FF5C93}
+@keyframes shake{25%{transform:translateX(-6px) rotate(-3deg)}75%{transform:translateX(6px) rotate(3deg)}}
+.secmsg{padding:22px 18px}
+.bouquet{width:min(68%,264px);height:auto}
+@media (prefers-reduced-motion:reduce){.heart.no{animation:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="phone" id="phone">
+
+<!-- 1 -->
+<section class="screen on" id="s-title" aria-labelledby="t-title">
+  <svg class="scene" viewBox="0 0 390 844" preserveAspectRatio="xMidYMin slice" shape-rendering="crispEdges" aria-hidden="true">
+    <rect width="390" height="844" fill="#33296B"/><rect width="390" height="140" fill="#14102E"/><rect y="140" width="390" height="80" fill="#1C1645"/><rect y="220" width="390" height="80" fill="#262058"/>
+    <rect x="290" y="60" width="40" height="8" fill="#FFF3C4"/><rect x="282" y="68" width="56" height="32" fill="#FFF3C4"/><rect x="290" y="100" width="40" height="8" fill="#FFF3C4"/><rect x="306" y="72" width="8" height="8" fill="#E8D99A"/><rect x="322" y="88" width="6" height="6" fill="#E8D99A"/>
+    <rect x="40" y="50" width="4" height="4" fill="#FFF"/><rect x="120" y="96" width="4" height="4" fill="#FFF"/><rect x="200" y="40" width="4" height="4" fill="#FFE066"/><rect x="240" y="160" width="4" height="4" fill="#FFF"/><rect x="70" y="190" width="4" height="4" fill="#FFE066"/><rect x="350" y="200" width="4" height="4" fill="#FFF"/>
+    <rect x="0" y="380" width="64" height="464" fill="#1A143F"/><rect x="64" y="364" width="48" height="480" fill="#1A143F"/><rect x="112" y="388" width="80" height="456" fill="#1A143F"/><rect x="192" y="356" width="40" height="488" fill="#1A143F"/><rect x="232" y="380" width="72" height="464" fill="#1A143F"/><rect x="304" y="368" width="86" height="476" fill="#1A143F"/>
+  </svg>
+  
+  <div class="rel" style="display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:5vh">
+    <p class="dot" style="margin:0;font-size:14px;letter-spacing:3px;color:#FFB8CD">約束の物語</p>
+    <h1 class="hd title-h" id="t-title" data-t="title"></h1>
+    <p class="dot" style="margin:6px 0 0;font-size:14px;letter-spacing:2px;color:#C9C2F0" data-t="subtitle"></p>
+  </div>
+  <div style="flex:1"></div>
+  <form class="win rel" id="nameForm" style="padding:18px;display:flex;flex-direction:column;gap:12px" novalidate>
+    <label for="nameInput" style="font-size:22px;font-weight:700" data-t="nameLabel"></label>
+    <input class="name" id="nameInput" type="text" autocomplete="off" data-ph="namePh">
+    <p class="err" id="nameErr" role="alert"></p>
+    <button class="yes" type="submit" style="justify-content:flex-start"><svg width="16" height="16" viewBox="0 0 8 8" shape-rendering="crispEdges" class="flipr" aria-hidden="true"><path d="M5 0h1v8H5zM4 1h1v6H4zM3 2h1v4H3zM2 3h1v2H2z" fill="#14102E"/></svg><span data-t="newGame"></span></button>
+  </form>
+  <p class="dot rel" style="margin:18px 0 0;font-size:12px;text-align:center;color:#A79EE0">© 2026 WHAT I PROMISED</p>
+</section>
+
+<!-- 2 -->
+<section class="screen" id="s-mood" aria-label="mood">
+  <svg class="scene" viewBox="0 0 390 844" preserveAspectRatio="xMidYMin slice" shape-rendering="crispEdges" aria-hidden="true">
+    <rect width="390" height="844" fill="#2A2160"/><rect width="390" height="520" fill="#3B2F7A"/><rect y="512" width="390" height="8" fill="#5A4FB0"/>
+    <rect x="215" y="70" width="140" height="170" fill="#1A143F"/><rect x="223" y="78" width="124" height="154" fill="#4C6FC4"/><rect x="281" y="78" width="8" height="154" fill="#1A143F"/><rect x="223" y="151" width="124" height="8" fill="#1A143F"/><rect x="300" y="96" width="24" height="24" fill="#FFF3C4"/><rect x="236" y="100" width="4" height="4" fill="#FFF"/><rect x="252" y="176" width="4" height="4" fill="#FFF"/><rect x="320" y="190" width="4" height="4" fill="#FFE066"/>
+  </svg>
+  <div class="top rel">
+    <button class="back" data-go="s-title" data-al="back"><svg width="16" height="16" viewBox="0 0 8 8" shape-rendering="crispEdges" class="flipr" aria-hidden="true"><path d="M2 0h1v8H2zM3 1h1v6H3zM4 2h1v4H4zM5 3h1v2H5z" fill="#FFF"/></svg></button>
+    <span class="chip" dir="ltr">CH.02</span>
+  </div>
+  <div style="flex:1"></div>
+  <div class="moods rel" id="moodGrid"></div>
+  <div class="win rel dlg" style="margin-top:18px;cursor:default">
+    <span class="plate" data-t="skar"></span>
+    <p class="say" id="skarSay" dir="auto"></p>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="screen" id="s-pick" aria-labelledby="t-pick" style="background:#14102E">
+  <div class="top rel">
+    <button class="back" data-go="s-mood" data-al="back"><svg width="16" height="16" viewBox="0 0 8 8" shape-rendering="crispEdges" class="flipr" aria-hidden="true"><path d="M2 0h1v8H2zM3 1h1v6H3zM4 2h1v4H4zM5 3h1v2H5z" fill="#FFF"/></svg></button>
+    <span class="chip" dir="ltr" style="background:#241E52">CH.03</span>
+  </div>
+  <div class="rel" style="display:flex;flex-direction:column;align-items:center;gap:4px">
+    <p class="dot" style="margin:0;font-size:15px;letter-spacing:4px;color:#FF5C93">SELECT CHARACTER</p>
+    <h2 class="hd" id="t-pick" style="margin:0;font-size:36px;text-shadow:3px 3px 0 #5A4FB0;text-align:center" data-t="pickTitle"></h2>
+  </div>
+  <div class="cards rel" id="cards"></div>
+  <p class="err rel" id="pickErr" role="alert" style="text-align:center;margin:0"></p>
+  <div class="row rel" style="margin-top:8px">
+    <button class="yes" id="startBtn" style="flex:1"><svg width="14" height="14" viewBox="0 0 8 8" shape-rendering="crispEdges" class="flipr" aria-hidden="true"><path d="M5 0h1v8H5zM4 1h1v6H4zM3 2h1v4H3zM2 3h1v2H2z" fill="#14102E"/></svg><span data-t="start"></span></button>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="screen" id="s-reveal" aria-label="reveal">
+  <svg class="scene" viewBox="0 0 390 844" preserveAspectRatio="xMidYMin slice" shape-rendering="crispEdges" aria-hidden="true">
+    <rect x="0" y="0" width="390" height="120" fill="#FF9FBE"></rect>
+    <rect x="0" y="120" width="390" height="120" fill="#FFB8CD"></rect>
+    <rect x="0" y="240" width="390" height="140" fill="#FFD3E0"></rect>
+    <rect x="162" y="58" width="36" height="12" fill="#FFFFFF"></rect>
+    <rect x="150" y="70" width="64" height="12" fill="#FFFFFF"></rect>
+    <rect x="140" y="82" width="84" height="8" fill="#FFE8EF"></rect>
+    <rect x="236" y="196" width="28" height="10" fill="#FFFFFF"></rect>
+    <rect x="224" y="206" width="56" height="10" fill="#FFFFFF"></rect>
+    <rect x="216" y="216" width="70" height="6" fill="#FFE8EF"></rect>
+    <rect x="96" y="250" width="40" height="8" fill="#FFFFFF"></rect>
+    <rect x="88" y="258" width="60" height="6" fill="#FFE8EF"></rect>
+    <rect x="244" y="334" width="70" height="46" fill="#CDBBE6"></rect>
+    <rect x="262" y="318" width="34" height="16" fill="#CDBBE6"></rect>
+    <rect x="170" y="310" width="50" height="20" fill="#B9A6D9"></rect>
+    <rect x="150" y="330" width="90" height="20" fill="#B9A6D9"></rect>
+    <rect x="128" y="350" width="134" height="30" fill="#B9A6D9"></rect>
+    <rect x="182" y="296" width="26" height="14" fill="#FFFFFF"></rect>
+    <rect x="174" y="310" width="42" height="6" fill="#FFFFFF"></rect>
+    <rect x="0" y="372" width="390" height="8" fill="#7FB8D6"></rect>
+    <rect x="0" y="380" width="390" height="180" fill="#C8E7F5"></rect>
+    <rect x="60" y="400" width="24" height="4" fill="#FFFFFF"></rect>
+    <rect x="300" y="420" width="32" height="4" fill="#FFFFFF"></rect>
+    <rect x="40" y="470" width="16" height="4" fill="#FFFFFF"></rect>
+    <rect x="330" y="500" width="20" height="4" fill="#FFFFFF"></rect>
+    <rect x="0" y="552" width="390" height="8" fill="#5A9C58"></rect>
+    <rect x="0" y="560" width="390" height="284" fill="#7FBF7A"></rect>
+    <rect x="10" y="580" width="4" height="8" fill="#5A9C58"></rect>
+    <rect x="16" y="576" width="4" height="12" fill="#5A9C58"></rect>
+    <rect x="360" y="590" width="4" height="8" fill="#5A9C58"></rect>
+    <rect x="366" y="586" width="4" height="12" fill="#5A9C58"></rect>
+    <rect x="44" y="600" width="6" height="6" fill="#FFB8CD"></rect>
+    <rect x="336" y="610" width="6" height="6" fill="#FFFFFF"></rect>
+    <rect x="24" y="200" width="16" height="352" fill="#6B4430"></rect>
+    <rect x="40" y="240" width="34" height="8" fill="#6B4430"></rect>
+    <rect x="30" y="200" width="6" height="352" fill="#55331F"></rect>
+    <rect x="-20" y="120" width="130" height="80" fill="#FF8FB1"></rect>
+    <rect x="0" y="100" width="90" height="24" fill="#FFA6C1"></rect>
+    <rect x="-20" y="196" width="100" height="20" fill="#FF7AA2"></rect>
+    <rect x="50" y="216" width="60" height="36" fill="#FF8FB1"></rect>
+    <rect x="58" y="248" width="40" height="10" fill="#FF7AA2"></rect>
+    <rect x="20" y="130" width="24" height="12" fill="#FFC2D4"></rect>
+    <rect x="64" y="150" width="16" height="8" fill="#FFC2D4"></rect>
+    <rect x="70" y="224" width="12" height="8" fill="#FFC2D4"></rect>
+    <rect x="-10" y="0" width="80" height="34" fill="#FF8FB1"></rect>
+    <rect x="0" y="34" width="50" height="14" fill="#FF7AA2"></rect>
+    <rect x="344" y="226" width="14" height="326" fill="#6B4430"></rect>
+    <rect x="316" y="262" width="28" height="8" fill="#6B4430"></rect>
+    <rect x="348" y="226" width="5" height="326" fill="#55331F"></rect>
+    <rect x="290" y="160" width="120" height="76" fill="#FF8FB1"></rect>
+    <rect x="310" y="140" width="80" height="24" fill="#FFA6C1"></rect>
+    <rect x="300" y="236" width="100" height="18" fill="#FF7AA2"></rect>
+    <rect x="276" y="244" width="56" height="32" fill="#FF8FB1"></rect>
+    <rect x="284" y="276" width="36" height="8" fill="#FF7AA2"></rect>
+    <rect x="330" y="172" width="20" height="10" fill="#FFC2D4"></rect>
+    <rect x="300" y="196" width="14" height="8" fill="#FFC2D4"></rect>
+    <rect x="290" y="252" width="12" height="8" fill="#FFC2D4"></rect>
+    <rect x="320" y="0" width="80" height="30" fill="#FF8FB1"></rect>
+    <rect x="344" y="30" width="46" height="12" fill="#FF7AA2"></rect>
+    <rect x="22" y="506" width="34" height="6" fill="#8D8A9E"></rect>
+    <rect x="28" y="512" width="22" height="16" fill="#A9A6BA"></rect>
+    <rect x="34" y="516" width="10" height="8" fill="#FFE066"></rect>
+    <rect x="32" y="528" width="14" height="24" fill="#8D8A9E"></rect>
+    <rect x="24" y="552" width="30" height="8" fill="#76738A"></rect>
+    <rect x="120" y="60" width="8" height="8" fill="#FFFFFF"></rect>
+    <rect x="128" y="68" width="8" height="8" fill="#FFFFFF"></rect>
+    <rect x="250" y="110" width="8" height="8" fill="#FF6F9C"></rect>
+    <rect x="258" y="118" width="6" height="6" fill="#FF6F9C"></rect>
+    <rect x="200" y="140" width="6" height="6" fill="#FFFFFF"></rect>
+    <rect x="110" y="170" width="8" height="8" fill="#FF6F9C"></rect>
+    <rect x="160" y="210" width="6" height="6" fill="#FFFFFF"></rect>
+    <rect x="290" y="96" width="6" height="6" fill="#FFFFFF"></rect>
+    <rect x="270" y="290" width="8" height="8" fill="#FF6F9C"></rect>
+    <rect x="278" y="298" width="6" height="6" fill="#FF6F9C"></rect>
+    <rect x="200" y="300" width="8" height="8" fill="#FF6F9C"></rect>
+    <rect x="90" y="330" width="8" height="8" fill="#FFFFFF"></rect>
+    <rect x="60" y="300" width="6" height="6" fill="#FF6F9C"></rect>
+    <rect x="370" y="330" width="8" height="8" fill="#FFFFFF"></rect>
+    <rect x="12" y="420" width="6" height="6" fill="#FF6F9C"></rect>
+    <rect x="360" y="440" width="8" height="8" fill="#FF6F9C"></rect>
+    <rect x="368" y="448" width="6" height="6" fill="#FF6F9C"></rect>
+    <rect x="50" y="480" width="6" height="6" fill="#FFFFFF"></rect>
+    <rect x="330" y="530" width="6" height="6" fill="#FFFFFF"></rect>
+    <rect x="66" y="560" width="8" height="8" fill="#FF6F9C"></rect>
+    <rect x="300" y="580" width="8" height="8" fill="#FF6F9C"></rect>
+  </svg>
+  <div class="top rel">
+    <span class="chip" dir="ltr">CH.12</span>
+  </div>
+  <div class="stage rel"><div class="sprite" id="sprite"></div></div>
+  <div class="win rel dlg" id="dlg" tabindex="0" aria-live="polite">
+    <span class="plate" id="charName"></span>
+    <p class="say" id="charSay" dir="auto"></p>
+    <svg class="caret" width="16" height="12" viewBox="0 0 8 6" shape-rendering="crispEdges" aria-hidden="true"><path d="M0 0h8v2H0zM2 2h4v2H2zM3 4h2v2H3z" fill="#FFE066"/></svg>
+  </div>
+  <div class="tools rel">
+    <button data-go="s-pick" data-t="otherChar"></button>
+    <button data-go="s-mood" data-t="otherMood"></button>
+    <button id="logBtn" data-t="log"></button>
+    <button data-go="s-title" data-t="home"></button>
+  </div>
+</section>
+
+<!-- secret 1 -->
+<section class="screen" id="s-hearts" aria-labelledby="t-hearts">
+  <svg class="scene" viewBox="0 0 390 844" preserveAspectRatio="xMidYMin slice" shape-rendering="crispEdges" aria-hidden="true"><rect width="390" height="844" fill="#1C1645"/><rect y="560" width="390" height="284" fill="#241E52"/><rect x="30" y="60" width="4" height="4" fill="#FFFFFF"/><rect x="340" y="90" width="4" height="4" fill="#FFE066"/><rect x="80" y="180" width="4" height="4" fill="#FFFFFF"/><rect x="300" y="230" width="6" height="6" fill="#FFB8CD"/><rect x="50" y="700" width="4" height="4" fill="#FFFFFF"/><rect x="360" y="640" width="4" height="4" fill="#FFE066"/><rect x="200" y="40" width="4" height="4" fill="#FFFFFF"/><rect x="150" y="760" width="6" height="6" fill="#FFB8CD"/><rect x="260" y="800" width="4" height="4" fill="#FFFFFF"/></svg>
+  <div class="top rel">
+    <button class="back" data-go="s-title" aria-label="رجوع"><svg width="16" height="16" viewBox="0 0 8 8" shape-rendering="crispEdges" class="flipr" aria-hidden="true"><path d="M2 0h1v8H2zM3 1h1v6H3zM4 2h1v4H4zM5 3h1v2H5z" fill="#FFF"/></svg></button>
+    <span class="chip" dir="ltr" style="color:#FF8FB1">CH.??</span>
+  </div>
+  <div class="rel" style="display:flex;flex-direction:column;align-items:center;gap:4px">
+    <p class="dot" style="margin:0;font-size:15px;letter-spacing:4px;color:#FF8FB1">SECRET ROUTE</p>
+    <h2 class="hd" id="t-hearts" style="margin:0;font-size:40px;text-shadow:3px 3px 0 #FF5C93">اختاري قلب</h2>
+  </div>
+  <div class="hearts rel" id="hearts"><button class="heart" type="button" data-heart="red" aria-label="قلب"><svg width="84" height="84" viewBox="0 0 90 90" shape-rendering="crispEdges" aria-hidden="true"><rect x="12" y="6" width="24" height="6" fill="#E04060"></rect>
+<rect x="54" y="6" width="24" height="6" fill="#E04060"></rect>
+<rect x="6" y="12" width="78" height="6" fill="#E04060"></rect>
+<rect x="6" y="18" width="78" height="6" fill="#E04060"></rect>
+<rect x="6" y="24" width="78" height="6" fill="#E04060"></rect>
+<rect x="6" y="30" width="78" height="6" fill="#E04060"></rect>
+<rect x="6" y="36" width="78" height="6" fill="#E04060"></rect>
+<rect x="6" y="42" width="78" height="6" fill="#E04060"></rect>
+<rect x="12" y="48" width="66" height="6" fill="#E04060"></rect>
+<rect x="12" y="54" width="66" height="6" fill="#E04060"></rect>
+<rect x="18" y="60" width="54" height="6" fill="#E04060"></rect>
+<rect x="24" y="66" width="42" height="6" fill="#E04060"></rect>
+<rect x="30" y="72" width="30" height="6" fill="#E04060"></rect>
+<rect x="42" y="78" width="6" height="6" fill="#E04060"></rect></svg></button><button class="heart" type="button" data-heart="layered" aria-label="قلب"><svg width="84" height="84" viewBox="0 0 90 90" shape-rendering="crispEdges" aria-hidden="true"><rect x="12" y="6" width="24" height="6" fill="#F06C9B"></rect>
+<rect x="54" y="6" width="24" height="6" fill="#F06C9B"></rect>
+<rect x="6" y="12" width="78" height="6" fill="#F06C9B"></rect>
+<rect x="6" y="18" width="12" height="6" fill="#F06C9B"></rect>
+<rect x="18" y="18" width="24" height="6" fill="#F48FB1"></rect>
+<rect x="42" y="18" width="6" height="6" fill="#F06C9B"></rect>
+<rect x="48" y="18" width="24" height="6" fill="#F48FB1"></rect>
+<rect x="72" y="18" width="12" height="6" fill="#F06C9B"></rect>
+<rect x="6" y="24" width="6" height="6" fill="#F06C9B"></rect>
+<rect x="12" y="24" width="18" height="6" fill="#F48FB1"></rect>
+<rect x="30" y="24" width="12" height="6" fill="#F8B4C9"></rect>
+<rect x="42" y="24" width="6" height="6" fill="#F48FB1"></rect>
+<rect x="48" y="24" width="12" height="6" fill="#F8B4C9"></rect>
+<rect x="60" y="24" width="18" height="6" fill="#F48FB1"></rect>
+<rect x="78" y="24" width="6" height="6" fill="#F06C9B"></rect>
+<rect x="6" y="30" width="6" height="6" fill="#F06C9B"></rect>
+<rect x="12" y="30" width="12" height="6" fill="#F48FB1"></rect>
+<rect x="24" y="30" width="42" height="6" fill="#F8B4C9"></rect>
+<rect x="66" y="30" width="12" height="6" fill="#F48FB1"></rect>
+<rect x="78" y="30" width="6" height="6" fill="#F06C9B"></rect>
+<rect x="6" y="36" width="6" height="6" fill="#F06C9B"></rect>
+<rect x="12" y="36" width="12" height="6" fill="#F48FB1"></rect>
+<rect x="24" y="36" width="6" height="6" fill="#F8B4C9"></rect>
+<rect x="30" y="36" width="30" height="6" fill="#FCD5E1"></rect>
+<rect x="60" y="36" width="6" height="6" fill="#F8B4C9"></rect>
+<rect x="66" y="36" width="12" height="6" fill="#F48FB1"></rect>
+<rect x="78" y="36" width="6" height="6" fill="#F06C9B"></rect>
+<rect x="6" y="42" width="6" height="6" fill="#F06C9B"></rect>
+<rect x="12" y="42" width="12" height="6" fill="#F48FB1"></rect>
+<rect x="24" y="42" width="6" height="6" fill="#F8B4C9"></rect>
+<rect x="30" y="42" width="30" height="6" fill="#FCD5E1"></rect>
+<rect x="60" y="42" width="6" height="6" fill="#F8B4C9"></rect>
+<rect x="66" y="42" width="12" height="6" fill="#F48FB1"></rect>
+<rect x="78" y="42" width="6" height="6" fill="#F06C9B"></rect>
+<rect x="12" y="48" width="6" height="6" fill="#F06C9B"></rect>
+<rect x="18" y="48" width="6" height="6" fill="#F48FB1"></rect>
+<rect x="24" y="48" width="12" height="6" fill="#F8B4C9"></rect>
+<rect x="36" y="48" width="18" height="6" fill="#FCD5E1"></rect>
+<rect x="54" y="48" width="12" height="6" fill="#F8B4C9"></rect>
+<rect x="66" y="48" width="6" height="6" fill="#F48FB1"></rect>
+<rect x="72" y="48" width="6" height="6" fill="#F06C9B"></rect>
+<rect x="12" y="54" width="6" height="6" fill="#F06C9B"></rect>
+<rect x="18" y="54" width="12" height="6" fill="#F48FB1"></rect>
+<rect x="30" y="54" width="6" height="6" fill="#F8B4C9"></rect>
+<rect x="36" y="54" width="18" height="6" fill="#FCD5E1"></rect>
+<rect x="54" y="54" width="6" height="6" fill="#F8B4C9"></rect>
+<rect x="60" y="54" width="12" height="6" fill="#F48FB1"></rect>
+<rect x="72" y="54" width="6" height="6" fill="#F06C9B"></rect>
+<rect x="18" y="60" width="6" height="6" fill="#F06C9B"></rect>
+<rect x="24" y="60" width="12" height="6" fill="#F48FB1"></rect>
+<rect x="36" y="60" width="18" height="6" fill="#F8B4C9"></rect>
+<rect x="54" y="60" width="12" height="6" fill="#F48FB1"></rect>
+<rect x="66" y="60" width="6" height="6" fill="#F06C9B"></rect>
+<rect x="24" y="66" width="6" height="6" fill="#F06C9B"></rect>
+<rect x="30" y="66" width="12" height="6" fill="#F48FB1"></rect>
+<rect x="42" y="66" width="6" height="6" fill="#F8B4C9"></rect>
+<rect x="48" y="66" width="12" height="6" fill="#F48FB1"></rect>
+<rect x="60" y="66" width="6" height="6" fill="#F06C9B"></rect>
+<rect x="30" y="72" width="12" height="6" fill="#F06C9B"></rect>
+<rect x="42" y="72" width="6" height="6" fill="#F48FB1"></rect>
+<rect x="48" y="72" width="12" height="6" fill="#F06C9B"></rect>
+<rect x="42" y="78" width="6" height="6" fill="#F06C9B"></rect></svg></button><button class="heart" type="button" data-heart="outline" aria-label="قلب"><svg width="84" height="84" viewBox="0 0 90 90" shape-rendering="crispEdges" aria-hidden="true"><rect x="12" y="6" width="24" height="6" fill="#FFB8CD"></rect>
+<rect x="54" y="6" width="24" height="6" fill="#FFB8CD"></rect>
+<rect x="6" y="12" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="36" y="12" width="18" height="6" fill="#FFB8CD"></rect>
+<rect x="78" y="12" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="6" y="18" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="78" y="18" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="6" y="24" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="78" y="24" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="6" y="30" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="78" y="30" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="6" y="36" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="78" y="36" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="6" y="42" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="78" y="42" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="12" y="48" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="72" y="48" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="12" y="54" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="72" y="54" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="18" y="60" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="66" y="60" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="24" y="66" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="60" y="66" width="6" height="6" fill="#FFB8CD"></rect>
+<rect x="30" y="72" width="12" height="6" fill="#FFB8CD"></rect>
+<rect x="48" y="72" width="12" height="6" fill="#FFB8CD"></rect>
+<rect x="42" y="78" width="6" height="6" fill="#FFB8CD"></rect></svg></button><button class="heart" type="button" data-heart="purple" aria-label="قلب"><svg width="84" height="84" viewBox="0 0 90 90" shape-rendering="crispEdges" aria-hidden="true"><rect x="12" y="6" width="24" height="6" fill="#9B7BFF"></rect>
+<rect x="54" y="6" width="24" height="6" fill="#9B7BFF"></rect>
+<rect x="6" y="12" width="78" height="6" fill="#9B7BFF"></rect>
+<rect x="6" y="18" width="78" height="6" fill="#9B7BFF"></rect>
+<rect x="6" y="24" width="78" height="6" fill="#9B7BFF"></rect>
+<rect x="6" y="30" width="78" height="6" fill="#9B7BFF"></rect>
+<rect x="6" y="36" width="78" height="6" fill="#9B7BFF"></rect>
+<rect x="6" y="42" width="78" height="6" fill="#9B7BFF"></rect>
+<rect x="12" y="48" width="66" height="6" fill="#9B7BFF"></rect>
+<rect x="12" y="54" width="66" height="6" fill="#9B7BFF"></rect>
+<rect x="18" y="60" width="54" height="6" fill="#9B7BFF"></rect>
+<rect x="24" y="66" width="42" height="6" fill="#9B7BFF"></rect>
+<rect x="30" y="72" width="30" height="6" fill="#9B7BFF"></rect>
+<rect x="42" y="78" width="6" height="6" fill="#9B7BFF"></rect></svg></button><button class="heart" type="button" data-heart="broken" aria-label="قلب"><svg width="84" height="84" viewBox="0 0 90 90" shape-rendering="crispEdges" aria-hidden="true"><rect x="12" y="6" width="24" height="6" fill="#C03A5A"></rect>
+<rect x="54" y="6" width="24" height="6" fill="#C03A5A"></rect>
+<rect x="6" y="12" width="36" height="6" fill="#C03A5A"></rect>
+<rect x="48" y="12" width="36" height="6" fill="#C03A5A"></rect>
+<rect x="6" y="18" width="30" height="6" fill="#C03A5A"></rect>
+<rect x="42" y="18" width="42" height="6" fill="#C03A5A"></rect>
+<rect x="6" y="24" width="36" height="6" fill="#C03A5A"></rect>
+<rect x="48" y="24" width="36" height="6" fill="#C03A5A"></rect>
+<rect x="6" y="30" width="42" height="6" fill="#C03A5A"></rect>
+<rect x="54" y="30" width="30" height="6" fill="#C03A5A"></rect>
+<rect x="6" y="36" width="36" height="6" fill="#C03A5A"></rect>
+<rect x="48" y="36" width="36" height="6" fill="#C03A5A"></rect>
+<rect x="6" y="42" width="30" height="6" fill="#C03A5A"></rect>
+<rect x="42" y="42" width="42" height="6" fill="#C03A5A"></rect>
+<rect x="12" y="48" width="30" height="6" fill="#C03A5A"></rect>
+<rect x="48" y="48" width="30" height="6" fill="#C03A5A"></rect>
+<rect x="12" y="54" width="36" height="6" fill="#C03A5A"></rect>
+<rect x="54" y="54" width="24" height="6" fill="#C03A5A"></rect>
+<rect x="18" y="60" width="24" height="6" fill="#C03A5A"></rect>
+<rect x="48" y="60" width="24" height="6" fill="#C03A5A"></rect>
+<rect x="24" y="66" width="12" height="6" fill="#C03A5A"></rect>
+<rect x="42" y="66" width="24" height="6" fill="#C03A5A"></rect>
+<rect x="30" y="72" width="12" height="6" fill="#C03A5A"></rect>
+<rect x="48" y="72" width="12" height="6" fill="#C03A5A"></rect>
+<rect x="42" y="78" width="6" height="6" fill="#C03A5A"></rect></svg></button><button class="heart" type="button" data-heart="gold" aria-label="قلب"><svg width="84" height="84" viewBox="0 0 90 90" shape-rendering="crispEdges" aria-hidden="true"><rect x="12" y="6" width="24" height="6" fill="#FFD23F"></rect>
+<rect x="54" y="6" width="24" height="6" fill="#FFD23F"></rect>
+<rect x="6" y="12" width="78" height="6" fill="#FFD23F"></rect>
+<rect x="6" y="18" width="78" height="6" fill="#FFD23F"></rect>
+<rect x="6" y="24" width="78" height="6" fill="#FFD23F"></rect>
+<rect x="6" y="30" width="78" height="6" fill="#FFD23F"></rect>
+<rect x="6" y="36" width="78" height="6" fill="#FFD23F"></rect>
+<rect x="6" y="42" width="78" height="6" fill="#FFD23F"></rect>
+<rect x="12" y="48" width="66" height="6" fill="#FFD23F"></rect>
+<rect x="12" y="54" width="66" height="6" fill="#FFD23F"></rect>
+<rect x="18" y="60" width="54" height="6" fill="#FFD23F"></rect>
+<rect x="24" y="66" width="42" height="6" fill="#FFD23F"></rect>
+<rect x="30" y="72" width="30" height="6" fill="#FFD23F"></rect>
+<rect x="42" y="78" width="6" height="6" fill="#FFD23F"></rect></svg></button></div>
+  <div style="flex:1"></div>
+  <div class="win rel secmsg" id="heartMsg" role="alert" hidden><p class="say">مو موجه لك عزيزتي</p></div>
+</section>
+
+<!-- secret 2 -->
+<section class="screen" id="s-sname" aria-labelledby="t-sname">
+  <svg class="scene" viewBox="0 0 390 844" preserveAspectRatio="xMidYMin slice" shape-rendering="crispEdges" aria-hidden="true"><rect width="390" height="844" fill="#1C1645"/><rect y="560" width="390" height="284" fill="#241E52"/><rect x="30" y="60" width="4" height="4" fill="#FFFFFF"/><rect x="340" y="90" width="4" height="4" fill="#FFE066"/><rect x="80" y="180" width="4" height="4" fill="#FFFFFF"/><rect x="300" y="230" width="6" height="6" fill="#FFB8CD"/><rect x="50" y="700" width="4" height="4" fill="#FFFFFF"/><rect x="360" y="640" width="4" height="4" fill="#FFE066"/><rect x="200" y="40" width="4" height="4" fill="#FFFFFF"/><rect x="150" y="760" width="6" height="6" fill="#FFB8CD"/><rect x="260" y="800" width="4" height="4" fill="#FFFFFF"/></svg>
+  <div class="top rel">
+    <button class="back" data-go="s-hearts" aria-label="رجوع"><svg width="16" height="16" viewBox="0 0 8 8" shape-rendering="crispEdges" class="flipr" aria-hidden="true"><path d="M2 0h1v8H2zM3 1h1v6H3zM4 2h1v4H4zM5 3h1v2H5z" fill="#FFF"/></svg></button>
+    <span class="chip" dir="ltr" style="color:#FF8FB1">CH.??</span>
+  </div>
+  <div class="rel" style="display:flex;flex-direction:column;align-items:center;gap:4px">
+    <p class="dot" style="margin:0;font-size:15px;letter-spacing:4px;color:#FF8FB1">SECRET ROUTE</p>
+    <h2 class="hd" id="t-sname" style="margin:0;font-size:40px;text-shadow:3px 3px 0 #FF5C93">ايش اسمك؟</h2>
+  </div>
+  <div style="flex:1"></div>
+  <form class="win rel" id="snameForm" style="padding:18px;display:flex;flex-direction:column;gap:12px" novalidate>
+    <label for="snameInput" style="font-size:22px;font-weight:700">اسمك~</label>
+    <input class="name" id="snameInput" type="text" autocomplete="off" placeholder="اكتبي اسمك">
+    <p class="err" id="snameErr" role="alert"></p>
+    <button class="yes" type="submit"><svg width="14" height="14" viewBox="0 0 8 8" shape-rendering="crispEdges" class="flipr" aria-hidden="true"><path d="M5 0h1v8H5zM4 1h1v6H4zM3 2h1v4H3zM2 3h1v2H2z" fill="#14102E"/></svg><span>التالي</span></button>
+  </form>
+  <div style="flex:1"></div>
+</section>
+
+<!-- secret 3 -->
+<section class="screen" id="s-bouquet" aria-labelledby="t-love" style="align-items:center">
+  <svg class="scene" viewBox="0 0 390 844" preserveAspectRatio="xMidYMin slice" shape-rendering="crispEdges" aria-hidden="true"><rect width="390" height="844" fill="#FFE3EC"/><rect width="390" height="200" fill="#FFB8CD"/><rect y="200" width="390" height="200" fill="#FFC6D7"/><rect y="400" width="390" height="260" fill="#FFD3E0"/></svg>
+  <div class="top rel" style="align-self:stretch">
+    <button class="back" data-go="s-hearts" aria-label="رجوع"><svg width="16" height="16" viewBox="0 0 8 8" shape-rendering="crispEdges" class="flipr" aria-hidden="true"><path d="M2 0h1v8H2zM3 1h1v6H3zM4 2h1v4H4zM5 3h1v2H5z" fill="#FFF"/></svg></button>
+    <span class="chip" dir="ltr">♥ END</span>
+  </div>
+  <div style="flex:1"></div>
+  <svg class="rel bouquet" role="img" aria-label="باقة فيها وردتين دوار شمس" viewBox="0 0 264 324" shape-rendering="crispEdges"><rect x="168" y="18" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="186" y="18" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="162" y="24" width="6" height="6" fill="#F6B800"></rect>
+<rect x="168" y="24" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="174" y="24" width="12" height="6" fill="#FFD23F"></rect>
+<rect x="186" y="24" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="192" y="24" width="12" height="6" fill="#F6B800"></rect>
+<rect x="204" y="24" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="150" y="30" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="156" y="30" width="12" height="6" fill="#F6B800"></rect>
+<rect x="168" y="30" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="174" y="30" width="12" height="6" fill="#FFD23F"></rect>
+<rect x="186" y="30" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="192" y="30" width="12" height="6" fill="#F6B800"></rect>
+<rect x="204" y="30" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="210" y="30" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="72" y="36" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="90" y="36" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="144" y="36" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="150" y="36" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="156" y="36" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="162" y="36" width="36" height="6" fill="#F6B800"></rect>
+<rect x="198" y="36" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="204" y="36" width="18" height="6" fill="#FFD23F"></rect>
+<rect x="66" y="42" width="6" height="6" fill="#F6B800"></rect>
+<rect x="72" y="42" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="78" y="42" width="12" height="6" fill="#FFD23F"></rect>
+<rect x="90" y="42" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="96" y="42" width="12" height="6" fill="#F6B800"></rect>
+<rect x="108" y="42" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="138" y="42" width="6" height="6" fill="#F6B800"></rect>
+<rect x="144" y="42" width="12" height="6" fill="#FFD23F"></rect>
+<rect x="156" y="42" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="162" y="42" width="12" height="6" fill="#F6B800"></rect>
+<rect x="174" y="42" width="18" height="6" fill="#6B4430"></rect>
+<rect x="192" y="42" width="12" height="6" fill="#F6B800"></rect>
+<rect x="204" y="42" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="210" y="42" width="12" height="6" fill="#FFE27A"></rect>
+<rect x="222" y="42" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="54" y="48" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="60" y="48" width="12" height="6" fill="#F6B800"></rect>
+<rect x="72" y="48" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="78" y="48" width="12" height="6" fill="#FFD23F"></rect>
+<rect x="90" y="48" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="96" y="48" width="12" height="6" fill="#F6B800"></rect>
+<rect x="108" y="48" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="114" y="48" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="138" y="48" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="144" y="48" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="150" y="48" width="12" height="6" fill="#F6B800"></rect>
+<rect x="162" y="48" width="6" height="6" fill="#6B4430"></rect>
+<rect x="168" y="48" width="6" height="6" fill="#A8754E"></rect>
+<rect x="174" y="48" width="30" height="6" fill="#6B4430"></rect>
+<rect x="204" y="48" width="6" height="6" fill="#F6B800"></rect>
+<rect x="210" y="48" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="216" y="48" width="12" height="6" fill="#F6B800"></rect>
+<rect x="48" y="54" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="54" y="54" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="60" y="54" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="66" y="54" width="36" height="6" fill="#F6B800"></rect>
+<rect x="102" y="54" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="108" y="54" width="18" height="6" fill="#FFD23F"></rect>
+<rect x="138" y="54" width="12" height="6" fill="#F6B800"></rect>
+<rect x="150" y="54" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="156" y="54" width="6" height="6" fill="#F6B800"></rect>
+<rect x="162" y="54" width="24" height="6" fill="#6B4430"></rect>
+<rect x="186" y="54" width="6" height="6" fill="#8A5A3C"></rect>
+<rect x="192" y="54" width="12" height="6" fill="#6B4430"></rect>
+<rect x="204" y="54" width="24" height="6" fill="#F6B800"></rect>
+<rect x="228" y="54" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="42" y="60" width="6" height="6" fill="#F6B800"></rect>
+<rect x="48" y="60" width="12" height="6" fill="#FFD23F"></rect>
+<rect x="60" y="60" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="66" y="60" width="12" height="6" fill="#F6B800"></rect>
+<rect x="78" y="60" width="18" height="6" fill="#6B4430"></rect>
+<rect x="96" y="60" width="12" height="6" fill="#F6B800"></rect>
+<rect x="108" y="60" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="114" y="60" width="12" height="6" fill="#FFE27A"></rect>
+<rect x="126" y="60" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="138" y="60" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="144" y="60" width="12" height="6" fill="#F6B800"></rect>
+<rect x="156" y="60" width="12" height="6" fill="#6B4430"></rect>
+<rect x="168" y="60" width="6" height="6" fill="#8A5A3C"></rect>
+<rect x="174" y="60" width="18" height="6" fill="#6B4430"></rect>
+<rect x="192" y="60" width="6" height="6" fill="#8A5A3C"></rect>
+<rect x="198" y="60" width="12" height="6" fill="#6B4430"></rect>
+<rect x="210" y="60" width="6" height="6" fill="#F6B800"></rect>
+<rect x="216" y="60" width="12" height="6" fill="#FFE27A"></rect>
+<rect x="42" y="66" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="48" y="66" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="54" y="66" width="12" height="6" fill="#F6B800"></rect>
+<rect x="66" y="66" width="6" height="6" fill="#6B4430"></rect>
+<rect x="72" y="66" width="6" height="6" fill="#A8754E"></rect>
+<rect x="78" y="66" width="30" height="6" fill="#6B4430"></rect>
+<rect x="108" y="66" width="6" height="6" fill="#F6B800"></rect>
+<rect x="114" y="66" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="120" y="66" width="12" height="6" fill="#F6B800"></rect>
+<rect x="132" y="66" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="138" y="66" width="12" height="6" fill="#FFE27A"></rect>
+<rect x="150" y="66" width="6" height="6" fill="#F6B800"></rect>
+<rect x="156" y="66" width="24" height="6" fill="#6B4430"></rect>
+<rect x="180" y="66" width="6" height="6" fill="#8A5A3C"></rect>
+<rect x="186" y="66" width="24" height="6" fill="#6B4430"></rect>
+<rect x="210" y="66" width="12" height="6" fill="#F6B800"></rect>
+<rect x="228" y="66" width="6" height="6" fill="#F6B800"></rect>
+<rect x="42" y="72" width="12" height="6" fill="#F6B800"></rect>
+<rect x="54" y="72" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="60" y="72" width="6" height="6" fill="#F6B800"></rect>
+<rect x="66" y="72" width="24" height="6" fill="#6B4430"></rect>
+<rect x="90" y="72" width="6" height="6" fill="#8A5A3C"></rect>
+<rect x="96" y="72" width="12" height="6" fill="#6B4430"></rect>
+<rect x="108" y="72" width="24" height="6" fill="#F6B800"></rect>
+<rect x="132" y="72" width="18" height="6" fill="#FFD23F"></rect>
+<rect x="150" y="72" width="6" height="6" fill="#F6B800"></rect>
+<rect x="156" y="72" width="6" height="6" fill="#6B4430"></rect>
+<rect x="162" y="72" width="6" height="6" fill="#8A5A3C"></rect>
+<rect x="168" y="72" width="24" height="6" fill="#6B4430"></rect>
+<rect x="192" y="72" width="6" height="6" fill="#8A5A3C"></rect>
+<rect x="198" y="72" width="12" height="6" fill="#6B4430"></rect>
+<rect x="210" y="72" width="6" height="6" fill="#F6B800"></rect>
+<rect x="216" y="72" width="12" height="6" fill="#FFE27A"></rect>
+<rect x="42" y="78" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="48" y="78" width="12" height="6" fill="#F6B800"></rect>
+<rect x="60" y="78" width="12" height="6" fill="#6B4430"></rect>
+<rect x="72" y="78" width="6" height="6" fill="#8A5A3C"></rect>
+<rect x="78" y="78" width="18" height="6" fill="#6B4430"></rect>
+<rect x="96" y="78" width="6" height="6" fill="#8A5A3C"></rect>
+<rect x="102" y="78" width="12" height="6" fill="#6B4430"></rect>
+<rect x="114" y="78" width="6" height="6" fill="#F6B800"></rect>
+<rect x="120" y="78" width="12" height="6" fill="#FFE27A"></rect>
+<rect x="138" y="78" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="144" y="78" width="6" height="6" fill="#F6B800"></rect>
+<rect x="150" y="78" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="156" y="78" width="6" height="6" fill="#F6B800"></rect>
+<rect x="162" y="78" width="12" height="6" fill="#6B4430"></rect>
+<rect x="174" y="78" width="6" height="6" fill="#8A5A3C"></rect>
+<rect x="180" y="78" width="24" height="6" fill="#6B4430"></rect>
+<rect x="204" y="78" width="6" height="6" fill="#F6B800"></rect>
+<rect x="210" y="78" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="216" y="78" width="12" height="6" fill="#F6B800"></rect>
+<rect x="228" y="78" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="36" y="84" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="42" y="84" width="12" height="6" fill="#FFE27A"></rect>
+<rect x="54" y="84" width="6" height="6" fill="#F6B800"></rect>
+<rect x="60" y="84" width="24" height="6" fill="#6B4430"></rect>
+<rect x="84" y="84" width="6" height="6" fill="#8A5A3C"></rect>
+<rect x="90" y="84" width="24" height="6" fill="#6B4430"></rect>
+<rect x="114" y="84" width="12" height="6" fill="#F6B800"></rect>
+<rect x="132" y="84" width="6" height="6" fill="#F6B800"></rect>
+<rect x="138" y="84" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="144" y="84" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="150" y="84" width="12" height="6" fill="#F6B800"></rect>
+<rect x="162" y="84" width="24" height="6" fill="#6B4430"></rect>
+<rect x="186" y="84" width="6" height="6" fill="#8A5A3C"></rect>
+<rect x="192" y="84" width="12" height="6" fill="#6B4430"></rect>
+<rect x="204" y="84" width="6" height="6" fill="#F6B800"></rect>
+<rect x="210" y="84" width="18" height="6" fill="#FFD23F"></rect>
+<rect x="42" y="90" width="12" height="6" fill="#FFD23F"></rect>
+<rect x="54" y="90" width="6" height="6" fill="#F6B800"></rect>
+<rect x="60" y="90" width="6" height="6" fill="#6B4430"></rect>
+<rect x="66" y="90" width="6" height="6" fill="#8A5A3C"></rect>
+<rect x="72" y="90" width="24" height="6" fill="#6B4430"></rect>
+<rect x="96" y="90" width="6" height="6" fill="#8A5A3C"></rect>
+<rect x="102" y="90" width="12" height="6" fill="#6B4430"></rect>
+<rect x="114" y="90" width="6" height="6" fill="#F6B800"></rect>
+<rect x="120" y="90" width="12" height="6" fill="#FFE27A"></rect>
+<rect x="138" y="90" width="18" height="6" fill="#F6B800"></rect>
+<rect x="156" y="90" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="162" y="90" width="12" height="6" fill="#F6B800"></rect>
+<rect x="174" y="90" width="18" height="6" fill="#6B4430"></rect>
+<rect x="192" y="90" width="18" height="6" fill="#F6B800"></rect>
+<rect x="210" y="90" width="12" height="6" fill="#FFE27A"></rect>
+<rect x="222" y="90" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="42" y="96" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="48" y="96" width="6" height="6" fill="#F6B800"></rect>
+<rect x="54" y="96" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="60" y="96" width="6" height="6" fill="#F6B800"></rect>
+<rect x="66" y="96" width="12" height="6" fill="#6B4430"></rect>
+<rect x="78" y="96" width="6" height="6" fill="#8A5A3C"></rect>
+<rect x="84" y="96" width="24" height="6" fill="#6B4430"></rect>
+<rect x="108" y="96" width="6" height="6" fill="#F6B800"></rect>
+<rect x="114" y="96" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="120" y="96" width="12" height="6" fill="#F6B800"></rect>
+<rect x="132" y="96" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="144" y="96" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="150" y="96" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="156" y="96" width="12" height="6" fill="#FFD23F"></rect>
+<rect x="168" y="96" width="24" height="6" fill="#F6B800"></rect>
+<rect x="192" y="96" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="198" y="96" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="204" y="96" width="6" height="6" fill="#F6B800"></rect>
+<rect x="210" y="96" width="12" height="6" fill="#FFD23F"></rect>
+<rect x="42" y="102" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="48" y="102" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="54" y="102" width="12" height="6" fill="#F6B800"></rect>
+<rect x="66" y="102" width="24" height="6" fill="#6B4430"></rect>
+<rect x="90" y="102" width="6" height="6" fill="#8A5A3C"></rect>
+<rect x="96" y="102" width="12" height="6" fill="#6B4430"></rect>
+<rect x="108" y="102" width="6" height="6" fill="#F6B800"></rect>
+<rect x="114" y="102" width="18" height="6" fill="#FFD23F"></rect>
+<rect x="150" y="102" width="18" height="6" fill="#FFD23F"></rect>
+<rect x="168" y="102" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="174" y="102" width="6" height="6" fill="#F6B800"></rect>
+<rect x="180" y="102" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="186" y="102" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="192" y="102" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="198" y="102" width="6" height="6" fill="#F6B800"></rect>
+<rect x="204" y="102" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="210" y="102" width="6" height="6" fill="#F6B800"></rect>
+<rect x="42" y="108" width="18" height="6" fill="#F6B800"></rect>
+<rect x="60" y="108" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="66" y="108" width="12" height="6" fill="#F6B800"></rect>
+<rect x="78" y="108" width="18" height="6" fill="#6B4430"></rect>
+<rect x="96" y="108" width="18" height="6" fill="#F6B800"></rect>
+<rect x="114" y="108" width="12" height="6" fill="#FFE27A"></rect>
+<rect x="126" y="108" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="162" y="108" width="6" height="6" fill="#F6B800"></rect>
+<rect x="168" y="108" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="174" y="108" width="6" height="6" fill="#F6B800"></rect>
+<rect x="180" y="108" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="186" y="108" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="192" y="108" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="198" y="108" width="6" height="6" fill="#F6B800"></rect>
+<rect x="204" y="108" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="48" y="114" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="54" y="114" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="60" y="114" width="12" height="6" fill="#FFD23F"></rect>
+<rect x="72" y="114" width="24" height="6" fill="#F6B800"></rect>
+<rect x="96" y="114" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="102" y="114" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="108" y="114" width="6" height="6" fill="#F6B800"></rect>
+<rect x="114" y="114" width="12" height="6" fill="#FFD23F"></rect>
+<rect x="168" y="114" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="174" y="114" width="6" height="6" fill="#2F6F33"></rect>
+<rect x="186" y="114" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="54" y="120" width="18" height="6" fill="#FFD23F"></rect>
+<rect x="72" y="120" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="78" y="120" width="6" height="6" fill="#F6B800"></rect>
+<rect x="84" y="120" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="90" y="120" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="96" y="120" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="102" y="120" width="6" height="6" fill="#F6B800"></rect>
+<rect x="108" y="120" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="114" y="120" width="6" height="6" fill="#F6B800"></rect>
+<rect x="168" y="120" width="6" height="6" fill="#3E8E41"></rect>
+<rect x="174" y="120" width="6" height="6" fill="#2F6F33"></rect>
+<rect x="66" y="126" width="6" height="6" fill="#F6B800"></rect>
+<rect x="72" y="126" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="78" y="126" width="6" height="6" fill="#F6B800"></rect>
+<rect x="84" y="126" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="90" y="126" width="6" height="6" fill="#FFE27A"></rect>
+<rect x="96" y="126" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="102" y="126" width="6" height="6" fill="#F6B800"></rect>
+<rect x="108" y="126" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="168" y="126" width="6" height="6" fill="#3E8E41"></rect>
+<rect x="174" y="126" width="12" height="6" fill="#5DBB63"></rect>
+<rect x="66" y="132" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="72" y="132" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="90" y="132" width="6" height="6" fill="#FFD23F"></rect>
+<rect x="96" y="132" width="6" height="6" fill="#3E8E41"></rect>
+<rect x="102" y="132" width="6" height="6" fill="#2F6F33"></rect>
+<rect x="162" y="132" width="12" height="6" fill="#5DBB63"></rect>
+<rect x="174" y="132" width="12" height="6" fill="#3E8E41"></rect>
+<rect x="198" y="132" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="60" y="138" width="12" height="6" fill="#F8D3E2"></rect>
+<rect x="72" y="138" width="12" height="6" fill="#5DBB63"></rect>
+<rect x="96" y="138" width="6" height="6" fill="#3E8E41"></rect>
+<rect x="102" y="138" width="6" height="6" fill="#2F6F33"></rect>
+<rect x="150" y="138" width="12" height="6" fill="#5DBB63"></rect>
+<rect x="162" y="138" width="18" height="6" fill="#3E8E41"></rect>
+<rect x="198" y="138" width="12" height="6" fill="#F8D3E2"></rect>
+<rect x="60" y="144" width="12" height="6" fill="#F8D3E2"></rect>
+<rect x="72" y="144" width="12" height="6" fill="#3E8E41"></rect>
+<rect x="84" y="144" width="12" height="6" fill="#5DBB63"></rect>
+<rect x="96" y="144" width="6" height="6" fill="#3E8E41"></rect>
+<rect x="102" y="144" width="6" height="6" fill="#2F6F33"></rect>
+<rect x="150" y="144" width="24" height="6" fill="#3E8E41"></rect>
+<rect x="198" y="144" width="12" height="6" fill="#F8D3E2"></rect>
+<rect x="54" y="150" width="18" height="6" fill="#F8D3E2"></rect>
+<rect x="78" y="150" width="18" height="6" fill="#3E8E41"></rect>
+<rect x="96" y="150" width="12" height="6" fill="#5DBB63"></rect>
+<rect x="156" y="150" width="12" height="6" fill="#3E8E41"></rect>
+<rect x="168" y="150" width="6" height="6" fill="#2F6F33"></rect>
+<rect x="198" y="150" width="18" height="6" fill="#F8D3E2"></rect>
+<rect x="48" y="156" width="24" height="6" fill="#F8D3E2"></rect>
+<rect x="84" y="156" width="24" height="6" fill="#3E8E41"></rect>
+<rect x="108" y="156" width="6" height="6" fill="#2F6F33"></rect>
+<rect x="162" y="156" width="6" height="6" fill="#3E8E41"></rect>
+<rect x="168" y="156" width="6" height="6" fill="#2F6F33"></rect>
+<rect x="198" y="156" width="24" height="6" fill="#F8D3E2"></rect>
+<rect x="48" y="162" width="24" height="6" fill="#F8D3E2"></rect>
+<rect x="96" y="162" width="12" height="6" fill="#3E8E41"></rect>
+<rect x="108" y="162" width="6" height="6" fill="#2F6F33"></rect>
+<rect x="156" y="162" width="6" height="6" fill="#3E8E41"></rect>
+<rect x="162" y="162" width="6" height="6" fill="#2F6F33"></rect>
+<rect x="198" y="162" width="24" height="6" fill="#F8D3E2"></rect>
+<rect x="42" y="168" width="30" height="6" fill="#F8D3E2"></rect>
+<rect x="102" y="168" width="6" height="6" fill="#3E8E41"></rect>
+<rect x="108" y="168" width="6" height="6" fill="#2F6F33"></rect>
+<rect x="156" y="168" width="6" height="6" fill="#3E8E41"></rect>
+<rect x="162" y="168" width="6" height="6" fill="#2F6F33"></rect>
+<rect x="168" y="168" width="12" height="6" fill="#5DBB63"></rect>
+<rect x="198" y="168" width="30" height="6" fill="#F8D3E2"></rect>
+<rect x="36" y="174" width="36" height="6" fill="#F8D3E2"></rect>
+<rect x="102" y="174" width="6" height="6" fill="#3E8E41"></rect>
+<rect x="108" y="174" width="6" height="6" fill="#2F6F33"></rect>
+<rect x="156" y="174" width="12" height="6" fill="#5DBB63"></rect>
+<rect x="168" y="174" width="12" height="6" fill="#3E8E41"></rect>
+<rect x="198" y="174" width="36" height="6" fill="#F8D3E2"></rect>
+<rect x="36" y="180" width="12" height="6" fill="#F8D3E2"></rect>
+<rect x="48" y="180" width="12" height="6" fill="#E295B5"></rect>
+<rect x="60" y="180" width="12" height="6" fill="#F4C2D7"></rect>
+<rect x="72" y="180" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="78" y="180" width="36" height="6" fill="#F4C2D7"></rect>
+<rect x="114" y="180" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="120" y="180" width="36" height="6" fill="#F4C2D7"></rect>
+<rect x="156" y="180" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="162" y="180" width="36" height="6" fill="#F4C2D7"></rect>
+<rect x="198" y="180" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="204" y="180" width="12" height="6" fill="#E295B5"></rect>
+<rect x="216" y="180" width="18" height="6" fill="#F8D3E2"></rect>
+<rect x="48" y="186" width="12" height="6" fill="#E295B5"></rect>
+<rect x="60" y="186" width="6" height="6" fill="#F4C2D7"></rect>
+<rect x="66" y="186" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="72" y="186" width="36" height="6" fill="#F4C2D7"></rect>
+<rect x="108" y="186" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="114" y="186" width="36" height="6" fill="#F4C2D7"></rect>
+<rect x="150" y="186" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="156" y="186" width="36" height="6" fill="#F4C2D7"></rect>
+<rect x="192" y="186" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="198" y="186" width="6" height="6" fill="#F4C2D7"></rect>
+<rect x="204" y="186" width="12" height="6" fill="#E295B5"></rect>
+<rect x="54" y="192" width="12" height="6" fill="#E295B5"></rect>
+<rect x="66" y="192" width="36" height="6" fill="#F4C2D7"></rect>
+<rect x="102" y="192" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="108" y="192" width="36" height="6" fill="#F4C2D7"></rect>
+<rect x="144" y="192" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="150" y="192" width="36" height="6" fill="#F4C2D7"></rect>
+<rect x="186" y="192" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="192" y="192" width="6" height="6" fill="#F4C2D7"></rect>
+<rect x="198" y="192" width="12" height="6" fill="#E295B5"></rect>
+<rect x="54" y="198" width="12" height="6" fill="#E295B5"></rect>
+<rect x="66" y="198" width="30" height="6" fill="#F4C2D7"></rect>
+<rect x="96" y="198" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="102" y="198" width="36" height="6" fill="#F4C2D7"></rect>
+<rect x="138" y="198" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="144" y="198" width="36" height="6" fill="#F4C2D7"></rect>
+<rect x="180" y="198" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="186" y="198" width="12" height="6" fill="#F4C2D7"></rect>
+<rect x="198" y="198" width="12" height="6" fill="#E295B5"></rect>
+<rect x="60" y="204" width="12" height="6" fill="#E295B5"></rect>
+<rect x="72" y="204" width="18" height="6" fill="#F4C2D7"></rect>
+<rect x="90" y="204" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="96" y="204" width="36" height="6" fill="#F4C2D7"></rect>
+<rect x="132" y="204" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="138" y="204" width="36" height="6" fill="#F4C2D7"></rect>
+<rect x="174" y="204" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="180" y="204" width="12" height="6" fill="#F4C2D7"></rect>
+<rect x="192" y="204" width="12" height="6" fill="#E295B5"></rect>
+<rect x="60" y="210" width="12" height="6" fill="#E295B5"></rect>
+<rect x="72" y="210" width="12" height="6" fill="#F4C2D7"></rect>
+<rect x="84" y="210" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="90" y="210" width="18" height="6" fill="#F4C2D7"></rect>
+<rect x="108" y="210" width="12" height="6" fill="#FF5C93"></rect>
+<rect x="120" y="210" width="6" height="6" fill="#F4C2D7"></rect>
+<rect x="126" y="210" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="132" y="210" width="18" height="6" fill="#F4C2D7"></rect>
+<rect x="150" y="210" width="12" height="6" fill="#FF5C93"></rect>
+<rect x="162" y="210" width="6" height="6" fill="#F4C2D7"></rect>
+<rect x="168" y="210" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="174" y="210" width="18" height="6" fill="#F4C2D7"></rect>
+<rect x="192" y="210" width="12" height="6" fill="#E295B5"></rect>
+<rect x="66" y="216" width="12" height="6" fill="#E295B5"></rect>
+<rect x="78" y="216" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="84" y="216" width="24" height="6" fill="#F4C2D7"></rect>
+<rect x="108" y="216" width="18" height="6" fill="#FF5C93"></rect>
+<rect x="126" y="216" width="18" height="6" fill="#F4C2D7"></rect>
+<rect x="144" y="216" width="18" height="6" fill="#FF5C93"></rect>
+<rect x="162" y="216" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="168" y="216" width="18" height="6" fill="#F4C2D7"></rect>
+<rect x="186" y="216" width="12" height="6" fill="#E295B5"></rect>
+<rect x="66" y="222" width="12" height="6" fill="#E295B5"></rect>
+<rect x="78" y="222" width="30" height="6" fill="#F4C2D7"></rect>
+<rect x="108" y="222" width="6" height="6" fill="#FF5C93"></rect>
+<rect x="114" y="222" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="120" y="222" width="6" height="6" fill="#F4C2D7"></rect>
+<rect x="126" y="222" width="6" height="6" fill="#FF5C93"></rect>
+<rect x="132" y="222" width="6" height="6" fill="#F4C2D7"></rect>
+<rect x="138" y="222" width="6" height="6" fill="#FF5C93"></rect>
+<rect x="144" y="222" width="12" height="6" fill="#F4C2D7"></rect>
+<rect x="156" y="222" width="6" height="6" fill="#FF5C93"></rect>
+<rect x="162" y="222" width="24" height="6" fill="#F4C2D7"></rect>
+<rect x="186" y="222" width="12" height="6" fill="#E295B5"></rect>
+<rect x="66" y="228" width="12" height="6" fill="#E295B5"></rect>
+<rect x="78" y="228" width="12" height="6" fill="#F4C2D7"></rect>
+<rect x="90" y="228" width="42" height="6" fill="#FF5C93"></rect>
+<rect x="132" y="228" width="6" height="6" fill="#FFFFFF"></rect>
+<rect x="138" y="228" width="42" height="6" fill="#FF5C93"></rect>
+<rect x="180" y="228" width="6" height="6" fill="#F4C2D7"></rect>
+<rect x="186" y="228" width="12" height="6" fill="#E295B5"></rect>
+<rect x="72" y="234" width="12" height="6" fill="#E295B5"></rect>
+<rect x="84" y="234" width="6" height="6" fill="#F4C2D7"></rect>
+<rect x="90" y="234" width="90" height="6" fill="#E0407A"></rect>
+<rect x="180" y="234" width="12" height="6" fill="#E295B5"></rect>
+<rect x="72" y="240" width="12" height="6" fill="#E295B5"></rect>
+<rect x="84" y="240" width="12" height="6" fill="#F4C2D7"></rect>
+<rect x="96" y="240" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="102" y="240" width="18" height="6" fill="#F4C2D7"></rect>
+<rect x="120" y="240" width="6" height="6" fill="#FF5C93"></rect>
+<rect x="126" y="240" width="12" height="6" fill="#F4C2D7"></rect>
+<rect x="138" y="240" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="144" y="240" width="6" height="6" fill="#FF5C93"></rect>
+<rect x="150" y="240" width="30" height="6" fill="#F4C2D7"></rect>
+<rect x="180" y="240" width="12" height="6" fill="#E295B5"></rect>
+<rect x="78" y="246" width="12" height="6" fill="#E295B5"></rect>
+<rect x="90" y="246" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="96" y="246" width="18" height="6" fill="#F4C2D7"></rect>
+<rect x="114" y="246" width="6" height="6" fill="#FF5C93"></rect>
+<rect x="120" y="246" width="12" height="6" fill="#F4C2D7"></rect>
+<rect x="132" y="246" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="138" y="246" width="12" height="6" fill="#F4C2D7"></rect>
+<rect x="150" y="246" width="6" height="6" fill="#FF5C93"></rect>
+<rect x="156" y="246" width="18" height="6" fill="#F4C2D7"></rect>
+<rect x="174" y="246" width="12" height="6" fill="#E295B5"></rect>
+<rect x="78" y="252" width="12" height="6" fill="#E295B5"></rect>
+<rect x="90" y="252" width="24" height="6" fill="#F4C2D7"></rect>
+<rect x="114" y="252" width="6" height="6" fill="#FF5C93"></rect>
+<rect x="120" y="252" width="6" height="6" fill="#F4C2D7"></rect>
+<rect x="126" y="252" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="132" y="252" width="18" height="6" fill="#F4C2D7"></rect>
+<rect x="150" y="252" width="6" height="6" fill="#FF5C93"></rect>
+<rect x="156" y="252" width="12" height="6" fill="#F4C2D7"></rect>
+<rect x="168" y="252" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="174" y="252" width="12" height="6" fill="#E295B5"></rect>
+<rect x="84" y="258" width="12" height="6" fill="#E295B5"></rect>
+<rect x="96" y="258" width="24" height="6" fill="#F4C2D7"></rect>
+<rect x="120" y="258" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="126" y="258" width="36" height="6" fill="#F4C2D7"></rect>
+<rect x="162" y="258" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="168" y="258" width="12" height="6" fill="#E295B5"></rect>
+<rect x="84" y="264" width="12" height="6" fill="#E295B5"></rect>
+<rect x="96" y="264" width="18" height="6" fill="#F4C2D7"></rect>
+<rect x="114" y="264" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="120" y="264" width="36" height="6" fill="#F4C2D7"></rect>
+<rect x="156" y="264" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="162" y="264" width="6" height="6" fill="#F4C2D7"></rect>
+<rect x="168" y="264" width="12" height="6" fill="#E295B5"></rect>
+<rect x="90" y="270" width="12" height="6" fill="#E295B5"></rect>
+<rect x="102" y="270" width="6" height="6" fill="#F4C2D7"></rect>
+<rect x="108" y="270" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="114" y="270" width="36" height="6" fill="#F4C2D7"></rect>
+<rect x="150" y="270" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="156" y="270" width="6" height="6" fill="#F4C2D7"></rect>
+<rect x="162" y="270" width="12" height="6" fill="#E295B5"></rect>
+<rect x="90" y="276" width="12" height="6" fill="#E295B5"></rect>
+<rect x="102" y="276" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="108" y="276" width="36" height="6" fill="#F4C2D7"></rect>
+<rect x="144" y="276" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="150" y="276" width="12" height="6" fill="#F4C2D7"></rect>
+<rect x="162" y="276" width="12" height="6" fill="#E295B5"></rect>
+<rect x="90" y="282" width="12" height="6" fill="#E295B5"></rect>
+<rect x="102" y="282" width="36" height="6" fill="#F4C2D7"></rect>
+<rect x="138" y="282" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="144" y="282" width="18" height="6" fill="#F4C2D7"></rect>
+<rect x="162" y="282" width="12" height="6" fill="#E295B5"></rect>
+<rect x="96" y="288" width="12" height="6" fill="#E295B5"></rect>
+<rect x="108" y="288" width="24" height="6" fill="#F4C2D7"></rect>
+<rect x="132" y="288" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="138" y="288" width="18" height="6" fill="#F4C2D7"></rect>
+<rect x="156" y="288" width="12" height="6" fill="#E295B5"></rect>
+<rect x="96" y="294" width="12" height="6" fill="#E295B5"></rect>
+<rect x="108" y="294" width="18" height="6" fill="#F4C2D7"></rect>
+<rect x="126" y="294" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="132" y="294" width="24" height="6" fill="#F4C2D7"></rect>
+<rect x="156" y="294" width="12" height="6" fill="#E295B5"></rect>
+<rect x="102" y="300" width="12" height="6" fill="#E295B5"></rect>
+<rect x="114" y="300" width="6" height="6" fill="#F4C2D7"></rect>
+<rect x="120" y="300" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="126" y="300" width="24" height="6" fill="#F4C2D7"></rect>
+<rect x="150" y="300" width="12" height="6" fill="#E295B5"></rect>
+<rect x="102" y="306" width="12" height="6" fill="#E295B5"></rect>
+<rect x="114" y="306" width="6" height="6" fill="#F8D3E2"></rect>
+<rect x="120" y="306" width="30" height="6" fill="#F4C2D7"></rect>
+<rect x="150" y="306" width="12" height="6" fill="#E295B5"></rect>
+<rect x="108" y="312" width="12" height="6" fill="#E295B5"></rect>
+<rect x="120" y="312" width="24" height="6" fill="#F4C2D7"></rect>
+<rect x="144" y="312" width="12" height="6" fill="#E295B5"></rect>
+<rect x="108" y="318" width="12" height="6" fill="#E295B5"></rect>
+<rect x="120" y="318" width="24" height="6" fill="#F4C2D7"></rect>
+<rect x="144" y="318" width="12" height="6" fill="#E295B5"></rect></svg>
+  <h2 class="hd rel" id="t-love" style="margin:8px 0 0;font-size:84px;line-height:1.1;color:#FFFFFF;text-shadow:4px 4px 0 #FF5C93,8px 8px 0 #14102E">احبك</h2>
+  <div style="flex:1"></div>
+</section>
+
+<div class="overlay" id="logOv" role="dialog" aria-modal="true" aria-labelledby="t-log">
+  <div class="win logwin">
+    <span class="plate" id="t-log" data-t="logTitle"></span>
+    <ul class="loglist" id="logList"></ul>
+    <button class="yes" id="logClose" style="margin-top:16px"><span data-t="close"></span></button>
+  </div>
+</div>
+
+</div>
+<script id="data" type="application/json">{"moods": ["جتني الدورة", "مشاعري عاديه اليوم ؟", "ما احس اني كفايه", "سعيده >_<", "ابا احد يطبطب علي", "مرهقة", "احس بالوحدة", "شي كويس صارلي"], "friends": [{"names": ["باثو", "ضي"], "chars": [{"name": "اليوت", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠ ⁠˘͈⁠ ⁠ᵕ⁠ ⁠˘͈⁠♡⁠)⁩", "img": "1LWXuids5pBLLYPIoDtOjZXmneuwkUOMy"}, "مشاعري عاديه اليوم ؟": {"text": "كويس يا معالجتي مو ؟ ⁦(⁠・⁠・⁠ ⁠)⁩", "img": "1yMckCk5Eh2SF_4AEgCPVmuY8DVYcqIO1"}, "ما احس اني كفايه": {"text": "انت كفاية وزيادة, موقف في خضم اليوم لايعني انك مو كفاية ⁦(⁠๑⁠•̀⁠ㅂ⁠•́⁠)⁠و⁠✧⁩", "img": "1GXea9X9z4y8OBQSspFOIT2AfO1vk5SHP"}, "سعيده >_<": {"text": "ا-انا سعيد لاجلك أيضا ⁦(⁠≧⁠◡⁠≦⁠)⁩", "img": "1gBDbFBNNZgnGqOLoIL5l6s49GA52VFDc"}, "ابا احد يطبطب علي": {"text": "قد قلت مره There is no strength in the absence of fear ف اعرف ان بتعدي ⁦(⁠っ⁠´⁠▽⁠`⁠)⁠っ⁩", "img": "1zAuMP7HYQrh5rm3VSKZN65-FECL1yUxk"}, "مرهقة": {"text": "شطورة ⁦(⁠ ⁠˘⁠ω⁠˘⁠ ⁠)⁠ｽ⁠ﾔ⁠ｧ⁠…⁩", "img": "1LT3yNa_VpxaeQmFSOo3DbRP-sD-Gqoz_"}, "احس بالوحدة": {"text": "بالوحدة وانا موجود...؟ ⁦ʕ⁠•⁠ᴥ⁠•⁠ʔ⁩", "img": "1KraoMeeO9ZAO5yP16mJoVgPDKsK8ewMP"}, "شي كويس صارلي": {"text": "عقبال أشياء اكثر ⁦ヾ⁠(⁠≧⁠▽⁠≦⁠*⁠)⁠o⁩", "img": "1blwiQdbtNFZxUKlrXL_QBV_T5YC84cRr"}}}, {"name": "هاناكو", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠っ⁠˘̩⁠╭⁠╮⁠˘̩⁠)⁠っ⁩", "img": "1zvu0-9ofUBJvQcaYdMD6ockbnWA8V1Dg"}, "مشاعري عاديه اليوم ؟": {"text": "I'm a supernatural. No. 7 of the school's Seven Mysteries. Hanako-san of the toilet.\" Nice to meet you.", "img": "1-AiTIdJyKKBdu3JIo4scwLXqcIJpCo_R"}, "ما احس اني كفايه": {"text": "انت كفاية ⁦(⁠✿⁠◠⁠‿⁠◠⁠)⁩", "img": "1YcTZtjHNH2WDDSrvJPaiF1dKEAuTATZz"}, "سعيده >_<": {"text": "س- سعيد لأجلك ايضا ⁦ヽ⁠(⁠>⁠∀⁠<⁠☆⁠)⁠ノ⁩", "img": "1YMsdtuvP63fC0G1tqwl9hJeGe8uOOcqd"}, "ابا احد يطبطب علي": {"text": "Our fates have been tied together...\n...Across the Near and Far shores ⁦(⁠づ⁠￣⁠ ⁠³⁠￣⁠)⁠づ⁩", "img": "1YIPq5Dh4A3C-4gSxR349SDMwrBc9qX8T"}, "مرهقة": {"text": "منو ارهقك؟ ⁦(⁠´⁠-⁠ω⁠-⁠`⁠)⁩", "img": "16rZ83lcyV0jLpt3ja6hOWbUWR-sqmH3s"}, "احس بالوحدة": {"text": "بالوحدة وانا موجود...؟ ⁦(⁠っ⁠◔⁠◡⁠◔⁠)⁠っ⁠ ⁠♥⁩", "img": "1LKDs7MU2sgwlwdWDQ3bzTLIhbiIwQH1o"}, "شي كويس صارلي": {"text": "yayyyyyy ⁦☆⁠*⁠:⁠.⁠｡⁠.⁠o⁠(⁠≧⁠▽⁠≦⁠)⁠o⁠.⁠｡⁠.⁠:⁠*⁠☆⁩", "img": "1DWJopXeFjQuzjHSM8LgTk9AzkVRlssu1"}}}, {"name": "سوميرو", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠づ⁠｡⁠◕⁠‿⁠‿⁠◕⁠｡⁠)⁠づ⁩", "img": "1xSZirAuYxHdsfFQd2Yy7iYFZSiIOMCCV", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "It would make me happy if you were to fall into hell for me. ⁦(⁠￣⁠ω⁠￣⁠)⁩", "img": "16S5AgAoTi8AGGUpVDioW3CuxD5ALgr3V"}, "ما احس اني كفايه": {"text": "انت كفاية ⁦(⁠ง⁠ ⁠•̀⁠_⁠•́⁠)⁠ง⁩", "img": "1KTErDPvpM4ZG2CSffEpIz_jdYXzNsDuF"}, "سعيده >_<": {"text": "ياي ⁦(⁠ﾉ⁠◕⁠ヮ⁠◕⁠)⁠ﾉ⁠*⁠:⁠･⁠ﾟ⁠✧⁩", "img": "1Qd0UzjiaRqackVDwtMO7hy2txQAGOUVe"}, "ابا احد يطبطب علي": {"text": "طبطبي علي اول...", "img": "13qdd506gyDR_CnBiK7_ioHDIF_y8BXjx"}, "مرهقة": {"text": "مين تجرأ يرهقك ⁦(⁠っ⁠-⁠ ⁠‸⁠ ⁠–⁠ ⁠ς⁠)⁩", "img": "1UT9FuzoIMyIymCzZhUVIP7RgLQS3WBPT"}, "احس بالوحدة": {"text": "وانا موجودة... ⁦(⁠◕⁠ᴗ⁠◕⁠✿⁠)⁩", "img": "1r7K_E6Fz6CCrrfIimTFEshjWeKPBkt94"}, "شي كويس صارلي": {"text": "يايي ، عقبالي ؟ ⁦✧⁠*⁠｡⁠٩⁠(⁠ˊ⁠ᗜ⁠ˋ⁠*⁠)⁠و⁠✧⁠*⁠｡⁩", "img": "1sKAzqRWVCTDGq1txpZm_GcD8tZ2J5k1f"}}}, {"name": "اكي", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠｡⁠•́⁠︿⁠•̀⁠｡⁠)⁩", "img": "1kmqzDuPPkdpYgDE5IqLNKn8qDFCgYWyd", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "اوه؟ ⁦(⁠ ⁠˙⁠꒳​⁠˙⁠ ⁠)⁩", "img": "1bjEm1gvMQIHpBagKTRDd-rxmXQVmFYeJ"}, "ما احس اني كفايه": {"text": "انت كفايه ⁦٩⁠(⁠◕⁠‿⁠◕⁠｡⁠)⁠۶⁩", "img": "1Bsa2UnB065fcTW66U7TKctMhSfIJgLvN"}, "سعيده >_<": {"text": "If doing this will make you happy, then I'll gladly do it ⁦\\⁠(⁠^⁠▽⁠^⁠)⁠/⁩", "img": "1HSoN-JX3_3Erc87L2yJj9Hi1LpVs4txh"}, "ابا احد يطبطب علي": {"text": "كيف؟ ⁦(⁠｡⁠･⁠ω⁠･⁠)⁠ﾉ⁠ﾞ⁩", "img": "1eJcY33IPBQwyNnNOtO2fDc3sVInXIj2D"}, "مرهقة": {"text": "ارتاحي يامعالجتي ⁦(⁠－⁠.⁠－⁠)⁠.⁠.⁠.⁠z⁠z⁠z⁩", "img": "1uQ94w1xs7hvHPh9K8eCp7TydGZK8XBw8"}, "احس بالوحدة": {"text": "انا هنا عشانك ⁦(⁠*⁠´⁠▽⁠`⁠*⁠)⁩", "img": "1fPiW0teT96fep9IUat94XqnK8ReXKIlh"}, "شي كويس صارلي": {"text": "يايي ⁦(⁠*⁠≧⁠ω⁠≦⁠)⁩", "img": "1jjboaAt2TqaJb8FNEGLWEDqLUJiFFWbK"}}}]}, {"names": ["جورجي", "لبنى"], "chars": [{"name": "هاك", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠ ⁠˘͈⁠ ⁠ᵕ⁠ ⁠˘͈⁠♡⁠)⁩", "img": "1H8dIyevwNFzw6h4l3DCTMvzviR98GE6w", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "كويس طيب؟؟ ⁦(⁠・⁠・⁠ ⁠)⁩", "img": "1YXVbrPkWpNPnaOwvibR6pBDGlXUQ6mmP"}, "ما احس اني كفايه": {"text": "اها....... ⁦(⁠๑⁠•̀⁠ㅂ⁠•́⁠)⁠و⁠✧⁩", "img": "1hmKfpRwCqVdyuGImGuLPPhfVYPL9MLV4"}, "سعيده >_<": {"text": "وانا سعيد لك ⁦(⁠≧⁠◡⁠≦⁠)⁩", "img": "11z_ZWdjUH3bbK22CMn42pezjAvmY8JFN"}, "ابا احد يطبطب علي": {"text": "I'm immortal. Actually, I can't afford to die. I've got a troublesome princess to look after", "img": "1IX_xCjp08tiPBrut_BwSpwVdCs4UzQ6F"}, "مرهقة": {"text": "ارتاحي ⁦(⁠ ⁠˘⁠ω⁠˘⁠ ⁠)⁠ｽ⁠ﾔ⁠ｧ⁠…⁩", "img": "12XFuMPIaDv4_1BpFYHN9P8rbeei-nOqr"}, "احس بالوحدة": {"text": "مين يتجرأ؟؟ ⁦ʕ⁠•⁠ᴥ⁠•⁠ʔ⁩", "img": "1GGK1dYqJZH26z6PuQdKKeRjtGnSFqxZr"}, "شي كويس صارلي": {"text": "ياي كما هو متوقع من وزيرتي ⁦ヾ⁠(⁠≧⁠▽⁠≦⁠*⁠)⁠o⁩", "img": "1hmKfpRwCqVdyuGImGuLPPhfVYPL9MLV4"}}}, {"name": "سانجي", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠っ⁠˘̩⁠╭⁠╮⁠˘̩⁠)⁠っ⁩", "img": "1Dcv1YcGxsFL9GKH_fD1nCdJTxNit1-tU", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "طب والمطلوب مني ؟ ⁦(⁠ ⁠´⁠ ⁠▽⁠ ⁠`⁠ ⁠)⁩", "img": "12G-uv78LpZuXzRv20uGzsiBa--NtzpAP"}, "ما احس اني كفايه": {"text": "انت كفاية ⁦(⁠✿⁠◠⁠‿⁠◠⁠)⁩", "img": "1MJJFWHpYQvpo05ApoEA9qPSTiY5WPm90"}, "سعيده >_<": {"text": "تشيييززز ⁦ヽ⁠(⁠>⁠∀⁠<⁠☆⁠)⁠ノ⁩", "img": "1N8b_wQJNfFtPez9GKsncPI1lezLUFQEr"}, "ابا احد يطبطب علي": {"text": "جبت هالورد لك وزيرتي ⁦(⁠づ⁠￣⁠ ⁠³⁠￣⁠)⁠づ⁩", "img": "18lR5QUhoARcBmIqn6kXib2EjOql-DZT-"}, "مرهقة": {"text": "هذا لك ....... ⁦(⁠´⁠-⁠ω⁠-⁠`⁠)⁩", "img": "150kJ_WOMGXUx2DStyQFCqNAZYg9ecwxS"}, "احس بالوحدة": {"text": "ليش؟ ⁦(⁠っ⁠◔⁠◡⁠◔⁠)⁠っ⁠ ⁠♥⁩", "img": "1uA6PiqNXGROXOofKXIJYzhQCySX4aAwo"}, "شي كويس صارلي": {"text": "يايي كويسسس ⁦☆⁠*⁠:⁠.⁠｡⁠.⁠o⁠(⁠≧⁠▽⁠≦⁠)⁠o⁠.⁠｡⁠.⁠:⁠*⁠☆⁩", "img": "1TBfOVxKklzMRxxjXYZDpVkL6kc0u0cJ9"}}}, {"name": "دوكجا", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠づ⁠｡⁠◕⁠‿⁠‿⁠◕⁠｡⁠)⁠づ⁩", "img": "1Lsepz_3Jv2mBzizcthDAx6oR_1rxUxqt", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "للحين؟ ⁦(⁠￣⁠ω⁠￣⁠)⁩", "img": "1nvkiwrVO5Fh2AKLm0lcZu1yktdqYEVv3"}, "ما احس اني كفايه": {"text": "انت كفاية ⁦(⁠ง⁠ ⁠•̀⁠_⁠•́⁠)⁠ง⁩", "img": "1VaUhG2n0c5SzTGr1JjcDfgPqgd3kUuQB"}, "سعيده >_<": {"text": "سعيدلك كمان ⁦(⁠ﾉ⁠◕⁠ヮ⁠◕⁠)⁠ﾉ⁠*⁠:⁠･⁠ﾟ⁠✧⁩", "img": "1wx2JvAGeZKkFBgtIQeZGWlDEygpdd7N6"}, "ابا احد يطبطب علي": {"text": "“I believe in you more than the future that hasn’t come yet.”", "img": "1LQA4kNbP7m7zuLWRMymw74iDY29VJlrh"}, "مرهقة": {"text": "بتعدي... ⁦(⁠っ⁠-⁠ ⁠‸⁠ ⁠–⁠ ⁠ς⁠)⁩", "img": "18Rl7lGnfkKreRS2tpMM-3XYSDQA1w52k"}, "احس بالوحدة": {"text": "حتى انا ؟ ⁦(⁠◕⁠ᴗ⁠◕⁠✿⁠)⁩", "img": "1VaUhG2n0c5SzTGr1JjcDfgPqgd3kUuQB"}, "شي كويس صارلي": {"text": "يايي ⁦✧⁠*⁠｡⁠٩⁠(⁠ˊ⁠ᗜ⁠ˋ⁠*⁠)⁠و⁠✧⁠*⁠｡⁩", "img": "1kP_TTHufjoxjrrOdMMsoE1dAkj12UCJ9"}}}, {"name": "اخوان الفضاء", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠｡⁠•́⁠︿⁠•̀⁠｡⁠)⁩", "img": "1IohWTqWbt-3JTPukX7iF8GZprmE_zJAj", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "بنرقص عشانك ⁦(⁠ ⁠˙⁠꒳​⁠˙⁠ ⁠)⁩", "img": "1FQ2HnJWkO-rIvlTXRSTbmeNGD5gPzBIe"}, "ما احس اني كفايه": {"text": "There are people who don't know you, who are saying a lot of awful things. But just saying stuff is easy, and anyone can do it. However...There's no one out there who could take your place.", "img": "1Tp-lb_3Oa8Gcg4GrINKB1yawNwvsvfNm"}, "سعيده >_<": {"text": "سعيد لك ايضا ⁦\\⁠(⁠^⁠▽⁠^⁠)⁠/⁩", "img": "1KuaHZJTqrNZ6WLD7olhjdAiyB3yJ8nVO"}, "ابا احد يطبطب علي": {"text": "An earnest failure has meaning. ⁦(⁠｡⁠･⁠ω⁠･⁠)⁠ﾉ⁠ﾞ⁩", "img": "1a6bj0yYeUrxaIAUF3kydAZguE3qpwN8i"}, "مرهقة": {"text": "ارتاحي ⁦(⁠－⁠.⁠－⁠)⁠.⁠.⁠.⁠z⁠z⁠z⁩", "img": "1xxWaAfq07EK_xrIhG3W9J35EjAAoKLhF"}, "احس بالوحدة": {"text": "الفضاء مليان نجوم واحنا ف لسا ؟ ⁦(⁠*⁠´⁠▽⁠`⁠*⁠)⁩", "img": "1xKq2GGiGQ2NMy2VZRkGlcfYSOJzo80KJ"}, "شي كويس صارلي": {"text": "ياييييي ⁦(⁠*⁠≧⁠ω⁠≦⁠)⁩", "img": "1fMZhnKU2iowkbgjJKhKkBixwuUfiSNv8"}}}]}, {"names": ["لينه", "ملاك", "lenah", "malak"], "chars": [{"name": "yuna", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها\nيارب تجيني الدورة بدالها اهم شي تكون بخير", "img": "1FRB7c_h8s0BHh8NAxHhsQDxWWadp9voj"}, "مشاعري عاديه اليوم ؟": {"text": "yappie ⁦(⁠・⁠・⁠ ⁠)⁩", "img": "1f_0fZrmy_GuXJ9MtUkC0uiv5ol2461yT"}, "ما احس اني كفايه": {"text": "بس انت كفاية ؟ ⁦(⁠๑⁠•̀⁠ㅂ⁠•́⁠)⁠و⁠✧⁩", "img": "1jBdBPmW4a2seseRpuDBIdLib1Z9jHeGC"}, "سعيده >_<": {"text": "yayyyyyyyyyyyyyyy ＾▽＾", "img": "1AlArbUyHLeUK_CvFINoahYqM6qSiJWU0"}, "ابا احد يطبطب علي": {"text": "\"And guardians… don’t forget to smile  \" ⁦(⁠っ⁠´⁠▽⁠`⁠)⁠っ⁩", "img": "1e1ysC8iAPA2mLW6kEU5gOGfwSYqxUoWN"}, "مرهقة": {"text": "خذي قسطا من الراحة جسمك انهك بما فيه الكفاية ،ولاحقة على كل شي ⁦(⁠ ⁠˘⁠ω⁠˘⁠ ⁠)⁠ｽ⁠ﾔ⁠ｧ⁠…⁩", "img": "1VHMyx-6mvaGIAH0amSAk4B69Y__8nKtJ"}, "احس بالوحدة": {"text": "even tho I'm here ? ⁦ʕ⁠•⁠ᴥ⁠•⁠ʔ⁩", "img": "1DDFp0X8zZkJCb1qOWIWUs6Ht5e6JXebQ"}, "شي كويس صارلي": {"text": "yayyyyyyyyyyyyyyyyyyyyyyyyy ⁦ヾ⁠(⁠≧⁠▽⁠≦⁠*⁠)⁠o⁩", "img": "1Q5rvLGeQJ4ksKW4uZiQZ9xUQmzAhpiif"}}}, {"name": "Beatrice", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها\nيارب تجيني الدورة بدالها اهم شي تكون بخير", "img": "1lIKRmzy3E7zVj_MwWahHAMWu0B3qM0zs", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "اوك...؟ ⁦(⁠ ⁠´⁠ ⁠▽⁠ ⁠`⁠ ⁠)⁩", "img": "1ZkSE2GcqOfFwL4DjdIFRSAtSHZluYSwN"}, "ما احس اني كفايه": {"text": "\"Don't look. Don't listen. And believe....... Release the power of your soul from \"the cage of flesh that imprisons it...............That's it. ......Good...", "img": "1jQ0XBirH0IrY4Q5pOhg_pyXxYRO2YKZn"}, "سعيده >_<": {"text": "يبيييييي ⁦ヽ⁠(⁠>⁠∀⁠<⁠☆⁠)⁠ノ⁩", "img": "1X7Np-XbwLiYfC73NFhY_PUrzvHt3-xXw"}, "ابا احد يطبطب علي": {"text": "مين...زعلك... ⁦(⁠づ⁠￣⁠ ⁠³⁠￣⁠)⁠づ⁩", "img": "1BYVUAHtkJ8FUIdcbdo_ATvWX01_y2Dw5"}, "مرهقة": {"text": "ك انسان  تستحقين الراحة ⁦(⁠´⁠-⁠ω⁠-⁠`⁠)⁩", "img": "19qL-ggX-fo9Q7HQOmS12rYSbEJMV1Wo7"}, "احس بالوحدة": {"text": "تصير ويا احسن الناس ⁦(⁠っ⁠◔⁠◡⁠◔⁠)⁠っ⁠ ⁠♥⁩", "img": "1ZkSE2GcqOfFwL4DjdIFRSAtSHZluYSwN"}, "شي كويس صارلي": {"text": "yayyy good to hear that ,my love ⁦☆⁠*⁠:⁠.⁠｡⁠.⁠o⁠(⁠≧⁠▽⁠≦⁠)⁠o⁠.⁠｡⁠.⁠:⁠*⁠☆⁩", "img": "1LVARGOQ_obGoLkxAOa-SLaHeErFtYcRv"}}}, {"name": "Kotone", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها\nيارب تجيني الدورة بدالها اهم شي تكون بخير", "img": "1jDIAHwJRRQeqNCTgSzCANTg4VWVETOq8", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "ياي ⁦(⁠￣⁠ω⁠￣⁠)⁩", "img": "1w7IP2crDREJdc34M-B60sKOPoysaWXT2"}, "ما احس اني كفايه": {"text": "مين حسسك كذا ؟ ⁦(⁠ง⁠ ⁠•̀⁠_⁠•́⁠)⁠ง⁩", "img": "1SDosBg8TfHqfE7Fzy-UrdKcpFfvhYKNS"}, "سعيده >_<": {"text": "as u should ⁦(⁠ﾉ⁠◕⁠ヮ⁠◕⁠)⁠ﾉ⁠*⁠:⁠･⁠ﾟ⁠✧⁩", "img": "15-ZzIqJUR34NfCSnEwtcGsUbyWdIDmMO"}, "ابا احد يطبطب علي": {"text": "حتى......انا.........", "img": "1YdAwV_uWY_wZcpYF47aNRALcU6dgAgn4"}, "مرهقة": {"text": "حتى......انا......... بس يعني .......... ⁦(⁠っ⁠-⁠ ⁠‸⁠ ⁠–⁠ ⁠ς⁠)⁩", "img": "1xBifX0kc7aJi5pwS_XmkqJlSLH7MdtRD"}, "احس بالوحدة": {"text": "not anymore ig ⁦(⁠◕⁠ᴗ⁠◕⁠✿⁠)⁩", "img": "1DobiToevvei56uHa31NBvYaAJvyYc5Qz"}, "شي كويس صارلي": {"text": "yayyyyyyyyyyyyyyyyyyy", "img": "1jt26znmfY990PqyPGNMtNqsW9ZuYfQbo"}}}, {"name": "Utena", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها\nيارب تجيني الدورة بدالها اهم شي تكون بخير", "img": "1XtFpo0lxdxQIf2IMxATZeDUpC9rjf0qp", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "okkayy ⁦(⁠ ⁠˙⁠꒳​⁠˙⁠ ⁠)⁩", "img": "1urUjKPuSSv6Al1WpHK1bKavizysKTHv5"}, "ما احس اني كفايه": {"text": "انت كفاية وزيادة, موقف في خضم اليوم لايعني انك مو كفاية", "img": "1DU7FkBq6IdjlnhqfSjPGMCCCkTKnEHc3"}, "سعيده >_<": {"text": "يايييييييييييييي العالم سعييددد ⁦\\⁠(⁠^⁠▽⁠^⁠)⁠/⁩", "img": "1VEwyUr3_gZDxMh8KZtUtSi8G-tOlBDfZ"}, "ابا احد يطبطب علي": {"text": "“I know how you feel…but do you truly want…to live for all time…the way you are now? To keep turning that scar into the Sword of Dios…as you nurse the same old wound…for all eternity?”", "img": "1S7Pc8NWlZvhmJ4Nhme9K37Q7DcOVdUtS"}, "مرهقة": {"text": "حتعدي ... ⁦(⁠－⁠.⁠－⁠)⁠.⁠.⁠.⁠z⁠z⁠z⁩", "img": "1UGJS4jq91ryxDC9bl2p1IGHQqdRD3xaz"}, "احس بالوحدة": {"text": "ب-بوجودي؟ ⁦(⁠*⁠´⁠▽⁠`⁠*⁠)⁩", "img": "1_DVfajzW8ZynB_HUVGRFCCvrz4mgCeLd"}, "شي كويس صارلي": {"text": "ياييييييييييييييييييييي ملكاا ⁦(⁠*⁠≧⁠ω⁠≦⁠)⁩", "img": "1S-mwznAAJ2iG8ne4jkDWfo79C-oo0zi6"}}}]}, {"names": ["رين", "rin"], "chars": [{"name": "تيرو", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠ ⁠˘͈⁠ ⁠ᵕ⁠ ⁠˘͈⁠♡⁠)⁩", "img": "1pX6nxrgYBr634eErvhEusNsE84WtiqNf", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "هذا كافي بالنسبه لي ⁦(⁠・⁠・⁠ ⁠)⁩", "img": "1tZDcwcMBDgLS5oR7jiodXWbQgkCfhAhi"}, "ما احس اني كفايه": {"text": "انت كفاية ⁦(⁠๑⁠•̀⁠ㅂ⁠•́⁠)⁠و⁠✧⁩", "img": "1kvZDaczbMtlq0Bj0TT_Bspou53ctw1OC"}, "سعيده >_<": {"text": "سعيد لأجلك ⁦(⁠≧⁠◡⁠≦⁠)⁩", "img": "1xY0VXqWCNIlvPWASYD16-ZVogSOnl7xN"}, "ابا احد يطبطب علي": {"text": "ايش صار؟ مين ضرك ؟ بحميك ⁦(⁠っ⁠´⁠▽⁠`⁠)⁠っ⁩", "img": "17MdVEZOvIxTfjPGySfgFNR6mWy3jTixQ"}, "مرهقة": {"text": "ارتاحي!!!!!!!!!!!!! ⁦(⁠ ⁠˘⁠ω⁠˘⁠ ⁠)⁠ｽ⁠ﾔ⁠ｧ⁠…⁩", "img": "1cNSLVUSyldoZOn3iuPwdEh6Lr5G4HefH"}, "احس بالوحدة": {"text": "وانا موجود ؟ ⁦ʕ⁠•⁠ᴥ⁠•⁠ʔ⁩", "img": "1j5XXGxJ042pA-zrI20gpmwzUdqAzVJpW"}, "شي كويس صارلي": {"text": "ياي حكيني ⁦ヾ⁠(⁠≧⁠▽⁠≦⁠*⁠)⁠o⁩", "img": "1UA0PM8kn92G9SEiK5UBAESLkgukrZUQB"}}}, {"name": "اوتشاكو", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠っ⁠˘̩⁠╭⁠╮⁠˘̩⁠)⁠っ⁩", "img": "1lUBSzKoGtdexn6mcEa0xIZijSSapnJog", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "كويس ، سماع ذلك يريحني ⁦(⁠ ⁠´⁠ ⁠▽⁠ ⁠`⁠ ⁠)⁩", "img": "1kZ03wWbmeYgL3XMYyLVYiO0DJNNCwC0i"}, "ما احس اني كفايه": {"text": "ولانا ... ⁦(⁠✿⁠◠⁠‿⁠◠⁠)⁩", "img": "1uWREeskZmjQD65mJ-bLpMGZi8zVAhFPL"}, "سعيده >_<": {"text": "يايييي ⁦ヽ⁠(⁠>⁠∀⁠<⁠☆⁠)⁠ノ⁩", "img": "1Dp4MQbdCHlSJ6TveZS56X5dR4IJVgkxs"}, "ابا احد يطبطب علي": {"text": "حتعدي....... ⁦(⁠づ⁠￣⁠ ⁠³⁠￣⁠)⁠づ⁩", "img": "16U2f6E7HXLFQruDAOZ2ClCsvfiFIfgGc"}, "مرهقة": {"text": "الإرهاق مايجي غير من شغل وتعب حتوصلي للي تبيه ارتاحي حاليا ⁦(⁠´⁠-⁠ω⁠-⁠`⁠)⁩", "img": "1VJ3wQ4TdFL97lymwuxG_NhrguKKxIh05"}, "احس بالوحدة": {"text": "وانا موجودة ؟ ⁦(⁠っ⁠◔⁠◡⁠◔⁠)⁠っ⁠ ⁠♥⁩", "img": "1gHxKsoDLJCjzNuADyCLkTVAf0qZ2j7qw"}, "شي كويس صارلي": {"text": "الحمدلله ⁦☆⁠*⁠:⁠.⁠｡⁠.⁠o⁠(⁠≧⁠▽⁠≦⁠)⁠o⁠.⁠｡⁠.⁠:⁠*⁠☆⁩", "img": "16U2f6E7HXLFQruDAOZ2ClCsvfiFIfgGc"}}}, {"name": "ايروما كن", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠づ⁠｡⁠◕⁠‿⁠‿⁠◕⁠｡⁠)⁠づ⁩", "img": "1Eo64y6YZKDY-fNM1RJcq5jizpY5Hd6X9", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "سعيد لسماع هذا عزيزتي رين ⁦(⁠￣⁠ω⁠￣⁠)⁩", "img": "1KJxpISavWXyfbciQfmfe8WQl56ksZ7Kk"}, "ما احس اني كفايه": {"text": "بس انت كفاية ⁦(⁠ง⁠ ⁠•̀⁠_⁠•́⁠)⁠ง⁩", "img": "1Eo64y6YZKDY-fNM1RJcq5jizpY5Hd6X9"}, "سعيده >_<": {"text": "هذا كل مااتمناه ⁦(⁠ﾉ⁠◕⁠ヮ⁠◕⁠)⁠ﾉ⁠*⁠:⁠･⁠ﾟ⁠✧⁩", "img": "1RMnMIR3M-UfOY7FtxAEjqFGZH5WsPcDu"}, "ابا احد يطبطب علي": {"text": "سأستمع لما لديك", "img": "1vPCOZj0IUJzD6DVdBVMlsKJ5H56kqbV-"}, "مرهقة": {"text": "ارتاحيييييي ⁦(⁠っ⁠-⁠ ⁠‸⁠ ⁠–⁠ ⁠ς⁠)⁩", "img": "1dc7YkogGFGguqSyqMCG6TrYTFgkm4AaI"}, "احس بالوحدة": {"text": "وانا....موجود........؟ ⁦(⁠◕⁠ᴗ⁠◕⁠✿⁠)⁩", "img": "12AqvU0hStJiDcvWAbqPa_BsvszattRLH"}, "شي كويس صارلي": {"text": "ياي ⁦✧⁠*⁠｡⁠٩⁠(⁠ˊ⁠ᗜ⁠ˋ⁠*⁠)⁠و⁠✧⁠*⁠｡⁩", "img": "1AZ6wd4bn2NiOzQAn7WdcLmZxpfYMQTkW"}}}, {"name": "ايما", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠｡⁠•́⁠︿⁠•̀⁠｡⁠)⁩", "img": "11QcZXqsmDtgHh-KZ4kmOp-HT1CXlu2Q-", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "لماذا تخططين اليوم؟ ⁦(⁠ ⁠˙⁠꒳​⁠˙⁠ ⁠)⁩", "img": "1_4OPgRok7SN9hQmnVPKQuIQW-_w28CIw"}, "ما احس اني كفايه": {"text": "انت كفاية ⁦٩⁠(⁠◕⁠‿⁠◕⁠｡⁠)⁠۶⁩", "img": "1dyJMYERDS4cqn-9aoHkbdP--E8D5-V9U"}, "سعيده >_<": {"text": "يايييييييييييييييي ⁦\\⁠(⁠^⁠▽⁠^⁠)⁠/⁩", "img": "1RyFHUvssIItsDnEvmQYRVqscA6QwKVhJ"}, "ابا احد يطبطب علي": {"text": "\"We're family that grew up together. Even if that person gets in the way, betrays us, or says I'm naive, I want to believe in that person!\"", "img": "1SkpumF03Ril163ouwEqHRcD0b1bt_hBz"}, "مرهقة": {"text": "حتعدي ⁦(⁠－⁠.⁠－⁠)⁠.⁠.⁠.⁠z⁠z⁠z⁩", "img": "1NF0RIo_2Ty1oNHGa6u8IwYi13E5gQ2G1"}, "احس بالوحدة": {"text": "مع انني نسيت العالم لأجلك؟ ⁦(⁠*⁠´⁠▽⁠`⁠*⁠)⁩", "img": "1E4I6G9rpUKjswu0sB01Gebsu2eOSuwhE"}, "شي كويس صارلي": {"text": "تستحقين الأشياء السعيدة ⁦(⁠*⁠≧⁠ω⁠≦⁠)⁩", "img": "1SkpumF03Ril163ouwEqHRcD0b1bt_hBz"}}}]}, {"names": ["يونا", "هدى", "yona"], "chars": [{"name": "كولومبينا", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠ ⁠˘͈⁠ ⁠ᵕ⁠ ⁠˘͈⁠♡⁠)⁩", "img": "189Vx79WtclWRKsZvqZVYSS3ujL6Pr43Z", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "كويس....... ⁦(⁠・⁠・⁠ ⁠)⁩", "img": "1jp0CaSlY5hch69-esbWWPcSIURa6Tv8n"}, "ما احس اني كفايه": {"text": "هممم ⁦(⁠๑⁠•̀⁠ㅂ⁠•́⁠)⁠و⁠✧⁩", "img": "1SYlr_P7z89X1Zec2gl2yLsKA3cGA-wVD"}, "سعيده >_<": {"text": "yay happy for u too ⁦(⁠≧⁠◡⁠≦⁠)⁩", "img": "1RanzA4kYNLPHena_Y6MhUtCfrHMrqA-l"}, "ابا احد يطبطب علي": {"text": "looking for me ? ⁦(⁠っ⁠´⁠▽⁠`⁠)⁠っ⁩", "img": "1y5oRJ2QL_WkOMysZbq5WrDxzEeOwApG3"}, "مرهقة": {"text": "خلينا ناكل شي ⁦(⁠ ⁠˘⁠ω⁠˘⁠ ⁠)⁠ｽ⁠ﾔ⁠ｧ⁠…⁩", "img": "1C2-gFG_WMWTB_G2g2YwUr_30g4wKDOCI"}, "احس بالوحدة": {"text": "مع اني موجودة؟ ⁦ʕ⁠•⁠ᴥ⁠•⁠ʔ⁩", "img": "18aFU9zs_O10_Vs1wzllX4PKBKabVgMvM"}, "شي كويس صارلي": {"text": "حتى انا..... ⁦ヾ⁠(⁠≧⁠▽⁠≦⁠*⁠)⁠o⁩", "img": "1pPyvzRGPZzKYgxSjTBY0vH9MLXkDjwrk"}}}, {"name": "Lord of mysterious-klein", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠っ⁠˘̩⁠╭⁠╮⁠˘̩⁠)⁠っ⁩", "img": "1iHo5F3ukJtsewF8DDKa4zO1HKaRZllFV", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "اوه اوكي ⁦(⁠ ⁠´⁠ ⁠▽⁠ ⁠`⁠ ⁠)⁩", "img": "1x0J3_AYY7bsNYteNTgrhFN8dQE92_CeB"}, "ما احس اني كفايه": {"text": "بس انت كفايه ⁦(⁠✿⁠◠⁠‿⁠◠⁠)⁩", "img": "1Gr0hzP8o78dmF8dbg7NjyEPjrqQy9Ssh"}, "سعيده >_<": {"text": "هذا الورد لك ⁦ヽ⁠(⁠>⁠∀⁠<⁠☆⁠)⁠ノ⁩", "img": "1snSSTGCBs7HYBeu8X5QdKlpiEXnJ0uFv"}, "ابا احد يطبطب علي": {"text": "حتى ........انا........ ⁦(⁠づ⁠￣⁠ ⁠³⁠￣⁠)⁠づ⁩", "img": "1oWCZgN5sgDMgp8qr7CFaycyW6QAVsPKv"}, "مرهقة": {"text": "استريحي ⁦(⁠´⁠-⁠ω⁠-⁠`⁠)⁩", "img": "10JaBJC6GtoWvIVXqY0yGhrvdUVCLTDRB"}, "احس بالوحدة": {"text": "حتى ........انا........ ⁦(⁠っ⁠◔⁠◡⁠◔⁠)⁠っ⁠ ⁠♥⁩", "img": "1huL4EKVmM1ZIxi3QcKgvb11qAha6ctQB"}, "شي كويس صارلي": {"text": "حكينيييييي ⁦☆⁠*⁠:⁠.⁠｡⁠.⁠o⁠(⁠≧⁠▽⁠≦⁠)⁠o⁠.⁠｡⁠.⁠:⁠*⁠☆⁩", "img": "1KLuHKVrgjLL9m_NzWlmYr69f2m4RcI8t"}}}, {"name": "نيلو", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠づ⁠｡⁠◕⁠‿⁠‿⁠◕⁠｡⁠)⁠づ⁩", "img": "1SY1wVRu9kL6SpXu3a_2UsCugORi5ehAD", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "ايييه؟ سعيدة لسماع هذا ⁦(⁠￣⁠ω⁠￣⁠)⁩", "img": "1wjouBdkgTrXan-QAHbKiQaccYX01Ey6l"}, "ما احس اني كفايه": {"text": "هاه ؟ في نظري انت كفاية ⁦(⁠ง⁠ ⁠•̀⁠_⁠•́⁠)⁠ง⁩", "img": "1lFW_KkA25fSRCVrIIsnmwyKBSOnV6SR2"}, "سعيده >_<": {"text": "يايي فلنرقص مع بعض ⁦(⁠ﾉ⁠◕⁠ヮ⁠◕⁠)⁠ﾉ⁠*⁠:⁠･⁠ﾟ⁠✧⁩", "img": "1adP8n8lUk7XvgrIV9zxCuaTUV1aAC0OW"}, "ابا احد يطبطب علي": {"text": "...", "img": "18IurmZU3w3QLvKsRjr5UqxeVstMiqLlO"}, "مرهقة": {"text": "ارتاحي.......... ⁦(⁠っ⁠-⁠ ⁠‸⁠ ⁠–⁠ ⁠ς⁠)⁩", "img": "1wM8ajL17Ov9WNuXwQjz2F5eRFss78OPd"}, "احس بالوحدة": {"text": "......... ⁦(⁠◕⁠ᴗ⁠◕⁠✿⁠)⁩", "img": "18IurmZU3w3QLvKsRjr5UqxeVstMiqLlO"}, "شي كويس صارلي": {"text": "حكينييي ⁦✧⁠*⁠｡⁠٩⁠(⁠ˊ⁠ᗜ⁠ˋ⁠*⁠)⁠و⁠✧⁠*⁠｡⁩", "img": "1eHuL1pPSDSVOb_3EtuPGvbQGaNo0Xlsn"}}}, {"name": "Inori or hikaru", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠｡⁠•́⁠︿⁠•̀⁠｡⁠)⁩", "img": "1Ru26Jkov0HdFnsrd8V5fnVSQheY3jrNo", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "ياييي؟؟؟؟؟؟ ⁦(⁠ ⁠˙⁠꒳​⁠˙⁠ ⁠)⁩", "img": "1yIJB7HOP6mWaX2mY2sLfedAl8XLB8Qvd"}, "ما احس اني كفايه": {"text": "مين قال؟ ⁦٩⁠(⁠◕⁠‿⁠◕⁠｡⁠)⁠۶⁩", "img": "1M2x-ujp-KxcIykdaRAwA0rL97aDRlLh4"}, "سعيده >_<": {"text": "حقا؟ هذا يسعدني ⁦\\⁠(⁠^⁠▽⁠^⁠)⁠/⁩", "img": "1Z7-WWOgwwgAZneZA_Y6tSqi4Ko8PNtcS"}, "ابا احد يطبطب علي": {"text": "\"I can become my strongest self out there, on the ice. And if I can't be the best in the place I want to be the most, then my life has no meaning.\"", "img": "152ergDPPw3XScrzXYKV5W8fFFAVmWtfw"}, "مرهقة": {"text": "حتى انا؟؟؟ ⁦(⁠－⁠.⁠－⁠)⁠.⁠.⁠.⁠z⁠z⁠z⁩", "img": "1T-Gp9W-gsz_CG62X_I3a_GXLqKL2ma05"}, "احس بالوحدة": {"text": "افهمك.......لم اشعر بالانتماء منذ مدة...... ⁦(⁠*⁠´⁠▽⁠`⁠*⁠)⁩", "img": "1TCDBtus4KjDIDkICY1_iMIVOKlOrqbXl"}, "شي كويس صارلي": {"text": "yay tell me about it ⁦(⁠*⁠≧⁠ω⁠≦⁠)⁩", "img": "1ueojLP-vqnCUKnANuw1D5KK5zpFeX6KT"}}}]}, {"names": ["امل", "amal"], "chars": [{"name": "كونان", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠ ⁠˘͈⁠ ⁠ᵕ⁠ ⁠˘͈⁠♡⁠)⁩", "img": "1gYCFbYfIiwcN_BoVQXkzZcwwRt8GiQ4f", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "good to hear ⁦(⁠・⁠・⁠ ⁠)⁩", "img": "1XkZHxPguBskA8N7bj9sqRIFyJCsC8x-j"}, "ما احس اني كفايه": {"text": "ولا انا ⁦(⁠๑⁠•̀⁠ㅂ⁠•́⁠)⁠و⁠✧⁩", "img": "1YYKZGBa1U3jixNR4vL1nC4prufHuBzls"}, "سعيده >_<": {"text": "ياييييييي ⁦(⁠≧⁠◡⁠≦⁠)⁩", "img": "1hewWtQXxPoaq5dXNyuIWC3FD76mj9Z4j"}, "ابا احد يطبطب علي": {"text": "اهتم فقط بالرصاصه الفضيه ف لا اعلم ⁦(⁠っ⁠´⁠▽⁠`⁠)⁠っ⁩", "img": "1_TMQYakx6cwiE5pKVXYuKKoe0UQhG9i-"}, "مرهقة": {"text": "مين ارهقك؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟؟ ⁦(⁠ ⁠˘⁠ω⁠˘⁠ ⁠)⁠ｽ⁠ﾔ⁠ｧ⁠…⁩", "img": "15kgkbtpLS60L_PDkquaOd01ZWbWv-yxY"}, "احس بالوحدة": {"text": "كل قضايا العالم ولسا وحيدة ... انا هنا لأجلك ⁦ʕ⁠•⁠ᴥ⁠•⁠ʔ⁩", "img": "1R82K32o6fklwspVC-ZMkTQP67Sd-vdIO"}, "شي كويس صارلي": {"text": "حكيني عنوو ⁦ヾ⁠(⁠≧⁠▽⁠≦⁠*⁠)⁠o⁩", "img": "1XkZHxPguBskA8N7bj9sqRIFyJCsC8x-j"}}}, {"name": "يونا", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠っ⁠˘̩⁠╭⁠╮⁠˘̩⁠)⁠っ⁩", "img": "12iJIJd0FFfFksbLPGleG9oLcR5LDPa58", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "is that so ? ⁦(⁠ ⁠´⁠ ⁠▽⁠ ⁠`⁠ ⁠)⁩", "img": "1JQrTmuFZpXM5y1d875Gs_1NK6Iu8GvMz"}, "ما احس اني كفايه": {"text": "بس ...... انت......... كفاية.............. ⁦(⁠✿⁠◠⁠‿⁠◠⁠)⁩", "img": "1gZoIQ98qi5gyoxgTwVkc-GfNtXlMuDbf"}, "سعيده >_<": {"text": "ياييي ⁦ヽ⁠(⁠>⁠∀⁠<⁠☆⁠)⁠ノ⁩", "img": "18y_ErkDhoTggwctbgNVo2MUCpmtjOAsx"}, "ابا احد يطبطب علي": {"text": "حتى انا....... رغم وجود التنانين وهاك لكن لابأس وجودهم يخفف وطأة ما امر به", "img": "1o4jTTwEkaWNIWhhIFz8_Kt3DMfxBNJrW"}, "مرهقة": {"text": "استريحي وتغذي ⁦(⁠´⁠-⁠ω⁠-⁠`⁠)⁩", "img": "1ymaIvGejxTh7dPy-wTeRSsZGMcRD67cK"}, "احس بالوحدة": {"text": "“I know that I have no strengths to offer. It irritates me how weak I am. But let me protect them!” - Princess Yona", "img": "1Agxjh13nVnfYRuurBErfuiSrDAG0NySt"}, "شي كويس صارلي": {"text": "حكينيييييييييي ⁦☆⁠*⁠:⁠.⁠｡⁠.⁠o⁠(⁠≧⁠▽⁠≦⁠)⁠o⁠.⁠｡⁠.⁠:⁠*⁠☆⁩", "img": "1JXjCA-fvx4LR5TTBwUwGfhg4Nldo8ELN"}}}, {"name": "هنتر اكس هنتر", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠づ⁠｡⁠◕⁠‿⁠‿⁠◕⁠｡⁠)⁠づ⁩", "img": "1tt0sKGNVha0fKgWfFygExqNEPueLHolj", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "كويسسسسس ⁦(⁠￣⁠ω⁠￣⁠)⁩", "img": "1KdglVOyLQA1ODB4Nd4cuKcjG_izBwlF2"}, "ما احس اني كفايه": {"text": "انت!!كفاية!! ⁦(⁠ง⁠ ⁠•̀⁠_⁠•́⁠)⁠ง⁩", "img": "1ig2npFBaFu-jcVN3f786IQ57nSRuVcbj"}, "سعيده >_<": {"text": "يايييييييي ⁦(⁠ﾉ⁠◕⁠ヮ⁠◕⁠)⁠ﾉ⁠*⁠:⁠･⁠ﾟ⁠✧⁩", "img": "1SyMv6v23XAmhwic72HH9RB74gqomwArz"}, "ابا احد يطبطب علي": {"text": "موجودين لأجلك", "img": "1k1KJfTLmb41M2M5Y9GMKDeTGoV0RniQ4"}, "مرهقة": {"text": "خذي قسطا من الراحة ....... ⁦(⁠っ⁠-⁠ ⁠‸⁠ ⁠–⁠ ⁠ς⁠)⁩", "img": "1k9P-4-1wbZcFLrLBEV67gXpIR4LKki-L"}, "احس بالوحدة": {"text": "احنا... هنا......عشانك......... ⁦(⁠◕⁠ᴗ⁠◕⁠✿⁠)⁩", "img": "1xeIuXKInjdjB3fq4Qi_4MhYK5HBO8PYI"}, "شي كويس صارلي": {"text": "حكيناااااااااا ⁦✧⁠*⁠｡⁠٩⁠(⁠ˊ⁠ᗜ⁠ˋ⁠*⁠)⁠و⁠✧⁠*⁠｡⁩", "img": "1VXEHG3HB5WZScAzA4Q1_Sb_AXXewKXtJ"}}}, {"name": "ماوماو", "moods": {"جتني الدورة": {"text": "بردا وسلاما\nاللهم هون عليها الم دورتها\nاللهم خفف عليها الم دورتها ⁦(⁠｡⁠•́⁠︿⁠•̀⁠｡⁠)⁩", "img": "1baMmCuy5PHplrCYprrI8oq0-TNlf2vGG", "periodDefault": true}, "مشاعري عاديه اليوم ؟": {"text": "ف ؟ ⁦(⁠ ⁠˙⁠꒳​⁠˙⁠ ⁠)⁩", "img": "1PRWm4UN3u5uyOTYCAUp4e2MltH-OM7Pu"}, "ما احس اني كفايه": {"text": "بس انت كفاية ⁦٩⁠(⁠◕⁠‿⁠◕⁠｡⁠)⁠۶⁩", "img": "1YH1aOgv0Afem3skbw04LPgRaZvaBJJnc"}, "سعيده >_<": {"text": "يايييييييييييييي ⁦\\⁠(⁠^⁠▽⁠^⁠)⁠/⁩", "img": "1fH-lRb5Krj7l_3R6CG4yv9xpjS3qebmU"}, "ابا احد يطبطب علي": {"text": "اقدر اعلمك على السموم؟ ⁦(⁠｡⁠･⁠ω⁠･⁠)⁠ﾉ⁠ﾞ⁩", "img": "1s5G1s9xEg3XNQgZnpBKbjgI0i-biUszg"}, "مرهقة": {"text": "ياه...... حتى انا......... ⁦(⁠－⁠.⁠－⁠)⁠.⁠.⁠.⁠z⁠z⁠z⁩", "img": "1m2seE8tmyQq1LHFJLf-EId8CevKETeoZ"}, "احس بالوحدة": {"text": "عندي جينشي صعب شوي افهمك بس افهمك ⁦(⁠*⁠´⁠▽⁠`⁠*⁠)⁩", "img": "1LYriVBGaHLKA0O7odja4x8DlvMNkvfRA"}, "شي كويس صارلي": {"text": "ايش يش ؟ ⁦(⁠*⁠≧⁠ω⁠≦⁠)⁩", "img": "1PRWm4UN3u5uyOTYCAUp4e2MltH-OM7Pu"}}}]}]}</script>
+<script>
+(function(){
+var D=JSON.parse(document.getElementById('data').textContent);
+var MOOD_EN=["My period came","Feeling normal today?","I don't feel like I'm enough","Happy >_<","I need a hug","Exhausted","I feel lonely","Something good happened"];
+var T={
+ ar:{title:"ما وعدتُكِ به",subtitle:"~ WHAT I PROMISED ~",nameLabel:"اسمك~",namePh:"بالعربي او الانقلش او النيك نيم",newGame:"ابدئي اللعبة",continue:"أكملي آخر حكاية",
+  emptyName:"اكتبي اسمك أول~",noName:"سكار: تؤتؤ لست في اول اصدار عاودي الزيارة فالاصدار القادم ~ \u2066(\u2060\uffe3\u2060^\u2060\uffe3\u2060)\u2060\u309e\u2069",skar:"سكار",ask:"يا {n}… ايش حاسة ومتمشعره اليوم ؟ \u2066(\u2060\u30fb\u2060\u03c9\u2060\u30fb\u2060)\u2069",
+  pickTitle:"مين تختاري لليوم؟",surprise:"فاجئيني",start:"يلا نبدأ",pickFirst:"اختاري شخصية أول",banner:"اليوم الذي ابتسمت فيه {n}",
+  otherChar:"شخصية ثانية",otherMood:"شعور ثاني",log:"السجل",home:"البداية",logTitle:"السجل",close:"تمام",emptyLog:"لسا ما فيه صفحات في حكايتك",noImg:"الصورة ما ظهرت",back:"رجوع"},
+ en:{title:"What I<br>Promised",subtitle:"~ YAKUSOKU NO MONOGATARI ~",nameLabel:"Your name~",namePh:"In Arabic, English, or your nickname",newGame:"NEW GAME",continue:"CONTINUE",
+  emptyName:"Type your name first~",noName:"Skar: I can't find that name in the story... try your other name or nickname",skar:"Skar",ask:"{n}... what are you feeling today?",
+  pickTitle:"Who will you pick today?",surprise:"Surprise me",start:"START",pickFirst:"Pick a character first",banner:"The day {n} smiled",
+  otherChar:"CHARACTER",otherMood:"MOOD",log:"LOG",home:"TITLE",logTitle:"LOG",close:"OK",emptyLog:"No pages in your story yet",noImg:"Image didn't load",back:"Back"}
+};
+var S={lang:'ar',friend:null,name:'',mood:null,pick:null};
+function store(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem(k));localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}}
+function t(k){return T[S.lang][k]}
+function disp(x){return String(x).replace(/>_</g,'\u2066>_<\u2069')}
+function norm(s){return (s||'').toLowerCase().replace(/[ً-ْـ]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/[\s._\-|\/]+/g,'')}
+function findFriend(n){var k=norm(n);if(!k)return null;for(var i=0;i<D.friends.length;i++){var f=D.friends[i];for(var j=0;j<f.names.length;j++){if(norm(f.names[j])===k)return i}}return null}
+function $(id){return document.getElementById(id)}
+function show(id){var ss=document.querySelectorAll('.screen');for(var i=0;i<ss.length;i++)ss[i].classList.toggle('on',ss[i].id===id);
+ if(id==='s-mood')renderMood();if(id==='s-pick')renderPick();if(id==='s-reveal')renderReveal();petals(id)}
+function applyLang(){var h=document.documentElement;h.lang=S.lang;h.dir=S.lang==='ar'?'rtl':'ltr';
+ var els=document.querySelectorAll('[data-t]');for(var i=0;i<els.length;i++){var k=els[i].getAttribute('data-t');if(k==='title')els[i].innerHTML=t(k);else els[i].textContent=t(k)}
+ var ph=document.querySelectorAll('[data-ph]');for(i=0;i<ph.length;i++)ph[i].placeholder=t(ph[i].getAttribute('data-ph'));
+ var al=document.querySelectorAll('[data-al]');for(i=0;i<al.length;i++)al[i].setAttribute('aria-label',t(al[i].getAttribute('data-al')));
+ var lb=document.querySelectorAll('.lang button');for(i=0;i<lb.length;i++)lb[i].setAttribute('aria-pressed',lb[i].getAttribute('data-lang')===S.lang?'true':'false');
+ $('nameErr').textContent='';$('pickErr').textContent='';
+ var cur=document.querySelector('.screen.on');if(cur&&cur.id!=='s-title'){if(cur.id==='s-reveal')renderReveal(true);else show(cur.id)}}
+function nameHTML(tpl){var p=tpl.split('{n}');var frag=document.createDocumentFragment();frag.appendChild(document.createTextNode(p[0]));var b=document.createElement('b');b.textContent=S.name;frag.appendChild(b);frag.appendChild(document.createTextNode(p[1]||''));return frag}
+function imgFor(c,mood){var m=c.moods[D.moods[mood]];if(m&&m.img)return m.img;for(var i=0;i<D.moods.length;i++){var x=c.moods[D.moods[i]];if(x&&x.img)return x.img}return null}
+function picture(box,id,label){box.innerHTML='';function ph(){box.innerHTML='';var d=document.createElement('div');d.className='ph';d.innerHTML='<svg width="48" height="48" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path d="M5 1h6v6H5zM3 9h10v6H3z" fill="#5A4FB0"/></svg>';var s=document.createElement('span');s.textContent=label;d.appendChild(s);box.appendChild(d)}
+ if(!id){ph();return}var srcs=['https://lh3.googleusercontent.com/d/'+id+'=w900','https://drive.google.com/thumbnail?id='+id+'&sz=w900'];var k=0;var im=new Image();im.alt=label;im.referrerPolicy='no-referrer';im.decoding='async';
+ im.onerror=function(){k++;if(k<srcs.length)im.src=srcs[k];else ph()};im.src=srcs[0];box.appendChild(im)}
+function renderMood(){$('skarSay').textContent='';$('skarSay').appendChild(nameHTML(t('ask')));var g=$('moodGrid');g.innerHTML='';
+ D.moods.forEach(function(m,i){var b=document.createElement('button');b.className='mood';b.type='button';b.textContent=disp(S.lang==='ar'?m:MOOD_EN[i]);b.setAttribute('aria-pressed',S.mood===i?'true':'false');
+  b.onclick=function(){S.mood=i;S.pick=null;var all=g.querySelectorAll('.mood');for(var j=0;j<all.length;j++)all[j].setAttribute('aria-pressed',j===i?'true':'false');setTimeout(function(){show('s-pick')},220)};g.appendChild(b)})}
+function chars(){return D.friends[S.friend].chars}
+function renderPick(){var w=$('cards');w.innerHTML='';$('pickErr').textContent='';chars().forEach(function(c,i){var b=document.createElement('button');b.className='card';b.type='button';b.setAttribute('aria-pressed',S.pick===i?'true':'false');
+ var p=document.createElement('span');p.className='pic';var n=document.createElement('span');n.className='nm';n.textContent=c.name;n.dir='auto';b.appendChild(p);b.appendChild(n);picture(p,imgFor(c,S.mood),c.name);
+ b.onclick=function(){S.pick=i;$('pickErr').textContent='';var all=w.querySelectorAll('.card');for(var j=0;j<all.length;j++)all[j].setAttribute('aria-pressed',j===i?'true':'false')};w.appendChild(b)})}
+var typer=null,full='';
+function typeOut(el,txt,instant){clearInterval(typer);full=txt;var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;if(instant||reduce){el.textContent=txt;return}el.textContent='';var i=0;typer=setInterval(function(){i+=1;el.textContent=txt.slice(0,i);if(i>=txt.length)clearInterval(typer)},38)}
+function renderReveal(langOnly){var c=chars()[S.pick];var m=c.moods[D.moods[S.mood]];$('charName').textContent=c.name;$('charName').dir='auto';
+ if(!langOnly){picture($('sprite'),imgFor(c,S.mood),c.name);typeOut($('charSay'),(m&&m.text)||'…');var log=store('wip_log')||[];log.unshift({d:Date.now(),f:S.friend,n:S.name,m:S.mood,c:S.pick});store('wip_log',log.slice(0,60))}}
+$('dlg').onclick=function(){clearInterval(typer);$('charSay').textContent=full};
+$('dlg').onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();$('dlg').onclick()}};
+$('nameForm').onsubmit=function(e){e.preventDefault();var v=$('nameInput').value.trim();if(!v){$('nameErr').textContent=t('emptyName');$('nameInput').focus();return}
+ if(SECRET.indexOf(norm(v))>-1){$('nameErr').textContent='';$('nameInput').value='';goSecret();return}
+ var f=findFriend(v);if(f===null){$('nameErr').textContent=t('noName');return}S.friend=f;S.name=v;S.mood=null;S.pick=null;$('nameErr').textContent='';show('s-mood')};
+
+var SECRET=['اداتشي','فقمه'],LOVE=['لينه','ملاك','lenah','malak'];
+function goSecret(){var hs=document.querySelectorAll('.heart');for(var i=0;i<hs.length;i++)hs[i].className='heart';$('heartMsg').hidden=true;$('snameInput').value='';$('snameErr').textContent='';show('s-hearts')}
+$('hearts').onclick=function(e){var b=e.target.closest('.heart');if(!b)return;var hs=document.querySelectorAll('.heart');for(var i=0;i<hs.length;i++)hs[i].className='heart';
+ if(b.getAttribute('data-heart')==='layered'){b.className='heart yes2';$('heartMsg').hidden=true;setTimeout(function(){show('s-sname');$('snameInput').focus()},300)}
+ else{void b.offsetWidth;b.className='heart no';$('heartMsg').hidden=false}};
+$('snameForm').onsubmit=function(e){e.preventDefault();var v=norm($('snameInput').value);if(LOVE.indexOf(v)>-1){$('snameErr').textContent='';show('s-bouquet')}else{$('snameErr').textContent='مو موجه لك عزيزتي'}};
+$('snameInput').oninput=function(){$('snameErr').textContent=''};
+$('nameInput').oninput=function(){$('nameErr').textContent=''};
+$('startBtn').onclick=function(){if(S.pick===null){$('pickErr').textContent=t('pickFirst');return}show('s-reveal')};
+document.addEventListener('click',function(e){var g=e.target.closest('[data-go]');if(g){show(g.getAttribute('data-go'))}});
+$('logBtn').onclick=function(){var ul=$('logList');ul.innerHTML='';var log=(store('wip_log')||[]).filter(function(x){return x.f===S.friend});
+ if(!log.length){var li=document.createElement('li');li.textContent=t('emptyLog');ul.appendChild(li)}
+ log.forEach(function(x){var c=D.friends[x.f]&&D.friends[x.f].chars[x.c];if(!c)return;var li=document.createElement('li');var s=document.createElement('small');s.textContent=new Date(x.d).toLocaleDateString(S.lang==='ar'?'ar':'en-GB',{day:'numeric',month:'short',year:'numeric'});li.appendChild(s);
+  li.appendChild(document.createTextNode(disp(S.lang==='ar'?D.moods[x.m]:MOOD_EN[x.m])+' · '+c.name));ul.appendChild(li)});
+ $('logOv').classList.add('on');$('logClose').focus()};
+$('logClose').onclick=function(){$('logOv').classList.remove('on');$('logBtn').focus()};
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&$('logOv').classList.contains('on'))$('logClose').onclick()});
+function petals(id){var old=document.querySelectorAll('.petal');for(var i=0;i<old.length;i++)old[i].remove();if(id!=='s-reveal'&&id!=='s-title'&&id!=='s-bouquet')return;var sc=$(id);
+ for(i=0;i<9;i++){var p=document.createElement('span');p.className='petal';p.style.left=(8+Math.random()*90)+'%';p.style.animationDuration=(7+Math.random()*7)+'s';p.style.animationDelay=(-Math.random()*12)+'s';if(i%3===0){p.style.background='#FFFFFF';p.style.width='6px';p.style.height='6px'}if(id==='s-bouquet'&&i%3!==0)p.style.background=i%2?'#FFD23F':'#F6B800';sc.insertBefore(p,sc.children[1])}}
+applyLang();petals('s-title');
+})();
+</script>
+</body>
+</html>
